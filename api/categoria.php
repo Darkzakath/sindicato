@@ -1,7 +1,6 @@
 <?php
 
 require 'Slim/Slim.php';
-require 'Connection.php';
 
 $app = new Slim();
 
@@ -55,7 +54,5 @@ function deleteCategoria($id) {
 
 function findByName($query) {
 }
-
-//function getConnection() {}
 
 ?>

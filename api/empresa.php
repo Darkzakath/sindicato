@@ -1,7 +1,6 @@
 <?php
 
 require 'Slim/Slim.php';
-require 'Connection.php';
 
 $app = new Slim();
 
@@ -51,7 +50,5 @@ function updateEmpresa($id) {}
 function deleteEmpresa($id) {}
 
 function findByName($query) {}
-
-//function getConnection() {}
 
 ?>
