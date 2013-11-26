@@ -1,0 +1,103 @@
+/*  Less Framework 4
+  http://lessframework.com
+  by Joni Korpi
+  License: http://opensource.org/licenses/mit-license.php */
+
+
+/*  Resets
+------  */
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6,
+p, blockquote, pre, a, abbr, address, cite, code, del, dfn, em,
+img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, hr,
+dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figure, figcaption, hgroup,
+menu, footer, header, nav, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+article, aside, canvas, figure, figure img, figcaption, hgroup,
+footer, header, nav, section, audio, video {
+  display: block;
+}
+
+a img {border: 0;}
+
+/*
+ * Global styles:
+ */
+@font-face{
+  font-family: SegoeUI;
+  src: url('../fonts/SEGOEUI.ttf');
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  font-family: 'SegoeUI';
+}
+
+/* Clear fix for floated elements
+http://css-tricks.com/snippets/css/clear-fix/
+*/
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+
+/* ----------------------- */
+
+.sign-left{
+  width: 50%;
+  float: left;
+  padding-top: 100px;
+
+}
+
+  .sign-left .back-background{
+    font-size: 10em;
+    position: absolute;
+    text-align: center;
+    width: 50%;
+    opacity: 0.1;
+  }
+  .sign-left .front-background{
+    position: relative;
+    left: 95px;
+    top: 80px;
+    font-size: 3em;
+  }
+
+.sign-right{
+  /*width: 50%;*/
+  padding-top: 100px;
+  float: left;
+}
+  .sign-right .section{
+    margin-top: 50px;
+  }
+  .sign-right .section .label{
+    margin-bottom: 4px;
+  }
+  .textbox input{
+    font-size: 1.2em;
+    width: 240px;
+  }
+  .iniciar{
+    float: left;
+    color: white;
+    background-color: #1E82CC;
+    font-weight: bold;
+    margin-top: 25px;
+    height: 2.1em;
+    line-height: 2.1em;
+    font-size: 0.9em;
+    padding: 3px 12px 5px;
+  }
