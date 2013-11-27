@@ -12,8 +12,8 @@
           <td width="169" align="center" valign="center"><img src="img/sgs.png"></td>
           <td align="right" valign="middle"><p class="textocomun"><img src="img/sgstexto.png" width="199" height="62"></p></td>
           <td width="75" align="right" valign="top" style="padding-top: 20px;"><img src="img/fatida.png" width="60"></td>
-          <td width="330" align="right"><p class="textocomun">Nota de cr&eacute;dito para la cuenta Nro.: <b>24410761/75</b></p>
-            <p class="textocomun"><b>CBU 92172441076175</b></p>
+          <td width="330" align="right"><p class="textocomun">Nota de cr&eacute;dito para la cuenta Nro.: <b>92172441076175</b></p>
+            <p class="textocomun"><b>CBU 0110244620024410761753</b></p>
             <p class="textocomun"><b>Banco de la Naci&oacute;n Argentina</b><br>
             Sucursal Don Bosco (9217)</p></td>
         </tr>
@@ -33,7 +33,7 @@
         <td align="center" valign="top"><strong>54321</strong></td>
         <td align="center" valign="top"><strong>30-56652835-1</strong></td>
         <td align="left" valign="top" class="center"><strong>SINDICATO GR&Aacute;FICO SURE&Ntilde;O</strong></td>
-        <td align="right" valign="top" class="center"><strong>000001</strong></td>
+        <td align="right" valign="top" class="center"><strong>000003</strong></td>
       </tr>
       <tr class="textoresaltado">
         <td align="center" valign="top">PERSONAL</td>
@@ -42,9 +42,9 @@
         <td colspan="2" align="center" valign="top">EMISI&Oacute;N</td>
         </tr>
       <tr class="textocomun">
-        <td align="center" valign="top"><strong>1</strong></td>
-        <td align="center" valign="top"><strong>9039.00</strong></td>
-        <td align="center" valign="top"><strong>07/13</strong></td>
+        <td align="center" valign="top"><strong><!--personal-->15</strong></td>
+        <td align="center" valign="top"><strong><!--rem-->115129.95</strong></td>
+        <td align="center" valign="top"><strong><!--periodo-->12/13</strong></td>
         <td colspan="2" align="center" valign="top"><strong>04/11/2013</strong></td>
         </tr>
     </table>
@@ -57,11 +57,11 @@
             </tr>
             <tr>
               <td>Cuota Sindical (2%)</td>
-              <td align="right">$180.74</td>
+              <td align="right">$2302.60</td>
             </tr>
             <tr>
               <td>Fondo Solidario (1%)</td>
-              <td align="right">$90.39</td>
+              <td align="right">$1151.30</td>
             </tr>
             <tr>
               <td>Cuota Mutual</td>
@@ -69,7 +69,7 @@
             </tr>
             <tr>
               <td>Recargo Mora</td>
-              <td align="right">$9.63</td>
+              <td align="right">$0.00</td>
             </tr>
             <tr>
               <td>Acuerdos</td>
@@ -81,12 +81,12 @@
             </tr>
             <tr class="textoresaltado">
               <td class="fontplus" style="color: red;">Total Depositado</td>
-              <td align="right" class="textocomun fontplus" style="color: red;">$830.76</td>
+              <td align="right" class="textocomun fontplus" style="color: red;">$4003.90</td>
             </tr>
           </table></td>
           <td align="right" valign="bottom" class="textoresaltado">
           	
-          	<div style="text-align:center;padding-left: 90px;">VENCIMIENTO<br><span class="textocomun" style="color: black;"><b>04/12/2013</b></span></div>
+          	<div style="text-align:center;padding-left: 90px;">VENCIMIENTO<br><span class="textocomun" style="color: black;"><b>10/12/2013</b></span></div>
           </td>
         </tr>
     </table></td>
@@ -97,7 +97,7 @@
         <td align="right">&nbsp;</td>
       </tr>
       <tr>
-        <td class="resultado">Son Pesos: ocho cientos treinta con 76 centavos.</td>
+        <td class="resultado">Son Pesos: cuatro mil tres con 90 centavos.</td>
       </tr>
       <tr>
         <td align="right" style="padding-right: 10px;"><em><strong>Tal&oacute;n para el banco</strong></em><strong>.</strong></td>
@@ -107,7 +107,7 @@
   <tr>
     <td align="center">
     	<!-- AGREGAMOS CODIGO DE BARRAS GENERADO -->
-    	<P class="codigodebarra">0000543212441076175305665283510000010010713000830760412131</P>
+    	<P class="codigodebarra"><!--Nº banco-->0000<!--Nº usuario-->54321<!--Cuenta sgs-->92172441076175<!--Cuit-->30566528351<!--Factura-->000003<!--Personal-->015<!--Periodo abonar-->1213<!--importe-->00400390<!--Fecha vencimiento-->101213<!--Digito verificador-->1</P>
     </td>
   </tr>
 </table>
@@ -123,8 +123,8 @@
           <td width="169" align="center" valign="center"><img src="img/sgs.png"></td>
           <td align="right" valign="middle"><p class="textocomun"><img src="img/sgstexto.png" width="199" height="62"></p></td>
           <td width="75" align="right" valign="top" style="padding-top: 20px;"><img src="img/fatida.png" width="60"></td>
-          <td width="330" align="right"><p class="textocomun">Nota de cr&eacute;dito para la cuenta Nro.: <b>24410761/75</b></p>
-            <p class="textocomun"><b>CBU 92172441076175</b></p>
+          <td width="330" align="right"><p class="textocomun">Nota de cr&eacute;dito para la cuenta Nro.: <b>92172441076175</b></p>
+            <p class="textocomun"><b>CBU 0110244620024410761753</b></p>
             <p class="textocomun"><b>Banco de la Naci&oacute;n Argentina</b><br>
             Sucursal Don Bosco (9217)</p></td>
         </tr>
@@ -144,7 +144,7 @@
         <td align="center" valign="top"><strong>54321</strong></td>
         <td align="center" valign="top"><strong>30-56652835-1</strong></td>
         <td align="left" valign="top" class="center"><strong>SINDICATO GR&Aacute;FICO SURE&Ntilde;O</strong></td>
-        <td align="right" valign="top" class="center"><strong>000001</strong></td>
+        <td align="right" valign="top" class="center"><strong>000003</strong></td>
       </tr>
       <tr class="textoresaltado">
         <td align="center" valign="top">PERSONAL</td>
@@ -153,9 +153,9 @@
         <td colspan="2" align="center" valign="top">EMISI&Oacute;N</td>
         </tr>
       <tr class="textocomun">
-        <td align="center" valign="top"><strong>1</strong></td>
-        <td align="center" valign="top"><strong>9039.00</strong></td>
-        <td align="center" valign="top"><strong>07/13</strong></td>
+        <td align="center" valign="top"><strong><!--personal-->15</strong></td>
+        <td align="center" valign="top"><strong><!--rem-->115129.95</strong></td>
+        <td align="center" valign="top"><strong><!--periodo-->12/13</strong></td>
         <td colspan="2" align="center" valign="top"><strong>04/11/2013</strong></td>
         </tr>
     </table></td>
@@ -166,12 +166,12 @@
         <td width="70%" valign="top"><table width="100%" border="0" cellpadding="2" cellspacing="0" class="textocomun">
           <tr class="textoresaltado">
             <td class="fontplus" style="color: red;">Total Depositado</td>
-            <td align="right" class="textocomun fontplus" style="color: red;">$830.76</td>
+            <td align="right" class="textocomun fontplus" style="color: red;">$4003.90</td>
           </tr>
         </table>
       </td>
       <td align="right" valign="bottom" class="textoresaltado">
-        <div style="text-align:center;padding-left: 90px;">VENCIMIENTO<br><span class="textocomun" style="color: black;"><b>04/12/2013</b></span></div>
+        <div style="text-align:center;padding-left: 90px;">VENCIMIENTO<br><span class="textocomun" style="color: black;"><b>10/12/2013</b></span></div>
       </td>
       </tr>
     </table></td>
@@ -179,7 +179,7 @@
   <tr>
     <td><table width="100%" border="0" cellpadding="2" cellspacing="0" class="textocomun">
       <tr>
-        <td class="resultado">Son Pesos: ocho cientos treinta con 76 centavos.</td>
+        <td class="resultado">Son Pesos: cuatro mil tres con 90 centavos.</td>
       </tr>
       <tr>
         <td align="right"><em><strong>Tal&oacute;n para el depositante.</strong></em></td>
