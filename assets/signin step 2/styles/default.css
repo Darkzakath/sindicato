@@ -26,6 +26,10 @@ footer, header, nav, section, audio, video {
 
 a img {border: 0;}
 
+ul, li, ol {
+  list-style: none;
+}
+
 /*
  * Global styles:
  */
@@ -55,23 +59,26 @@ http://css-tricks.com/snippets/css/clear-fix/
 /* ----------------------- */
 
 .sign-left{
-  width: 50%;
+  width: 40%;
   float: left;
   padding-top: 100px;
+  padding-left: 90px;
 
 }
 
-  .sign-left .back-background{
+  .back-background{
     font-size: 10em;
     position: absolute;
     text-align: center;
-    width: 50%;
+    width: 40%;
     opacity: 0.1;
   }
-  .sign-left .front-background{
+  .front-background{
     position: relative;
-    left: 95px;
+    text-align: center;
+    /*left: 95px;*/
     top: 80px;
+    width: 40%;
     font-size: 3em;
   }
 
@@ -83,8 +90,8 @@ http://css-tricks.com/snippets/css/clear-fix/
   .sign-right .section{
     margin-top: 50px;
   }
-  .sign-right .section .label{
-    margin-bottom: 4px;
+  .label{
+    margin-bottom: 5px;
   }
   .textbox input{
     font-size: 1.2em;
@@ -111,4 +118,41 @@ http://css-tricks.com/snippets/css/clear-fix/
   .new:hover{
     color: #4173c9;
     cursor: pointer;
+  }
+  .titel{
+    margin-bottom: 25px;
+    font-size: 24px;
+  }
+  .section{
+    width: 50%;
+    float: left;
+  }
+  .center-step{
+    text-align: center;
+    font-size: 25px;
+  }
+  .step{
+    background-color: #4173c9;
+    margin: 0px 100px 20px 100px;
+    line-height: 50px;
+    color: white;
+  }
+  .step2{
+    background-color: #8FAEE4;
+    margin: 0px 100px 20px 100px;
+    line-height: 50px;
+    color: white;
+  }
+  .plus{
+    background-color: #1E82CC;
+    color: white;
+    margin-left: 5px;
+    padding: 0px 4px;
+    font-size: 15px;
+    font-weight: bolder;
+    border-radius: 15px;
+  }
+  .plus:hover{
+    cursor: pointer;
+    background-color: #4173c9;
   }
