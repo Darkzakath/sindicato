@@ -14,7 +14,7 @@ define (
 	function(backbone){
 	return backbone.Model.extend({
 		defaults:{
-			razonSocial: '',
+			razonsocial: '',
 			nombre: '',
 			cuit: '',
 			domicilio: '',

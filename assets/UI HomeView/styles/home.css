@@ -1,0 +1,43 @@
+@font-face{
+	font-family: name;
+	/*src: url('../fonts/');*/
+}
+.fonts-menu{
+	/*font-family: '';*/
+}
+
+.home-container{
+	width: 1200px;
+	margin: 0 auto;
+}
+.home-header{
+	height: 80px;
+}
+
+.home-container .home-left{
+	width: 275px;
+	float: left;
+}
+	.home-left ul{
+		/*width: 200px;*/
+		background-color: #575757;
+		color: rgb(216, 216, 216);
+	}
+
+	.home-left ul li{
+		height: 65px;
+		line-height: 65px;
+		border-bottom: 1px solid rgb(117, 117, 117);
+	}
+
+	.home-left ul li:hover{
+		color: white;
+		background-color: rgb(61, 61, 61);
+		cursor: pointer;
+	}
+
+.home-container .home-right{
+	width: 885px;
+	float: left;
+	margin: 0px 20px;
+}

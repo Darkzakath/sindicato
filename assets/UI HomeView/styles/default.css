@@ -1,0 +1,145 @@
+/*  Less Framework 4
+  http://lessframework.com
+  by Joni Korpi
+  License: http://opensource.org/licenses/mit-license.php */
+
+
+/*  Resets
+------  */
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6,
+p, blockquote, pre, a, abbr, address, cite, code, del, dfn, em,
+img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, hr,
+dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figure, figcaption, hgroup,
+menu, footer, header, nav, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+article, aside, canvas, figure, figure img, figcaption, hgroup,
+footer, header, nav, section, audio, video {
+  display: block;
+}
+
+a img {border: 0;}
+
+ul, li, ol {
+  list-style: none;
+}
+
+/*
+ * Global styles:
+ */
+@font-face{
+  font-family: SegoeUI;
+  src: url('../fonts/SEGOEUI.ttf');
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  font-family: 'SegoeUI';
+}
+
+/* Clear fix for floated elements
+http://css-tricks.com/snippets/css/clear-fix/
+*/
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+
+/* ----------------------- */
+
+.sign-left{
+  width: 40%;
+  float: left;
+  padding-top: 100px;
+  padding-left: 90px;
+
+}
+
+  .back-background{
+    font-size: 10em;
+    position: absolute;
+    text-align: center;
+    width: 40%;
+    opacity: 0.1;
+  }
+  .front-background{
+    position: relative;
+    text-align: center;
+    /*left: 95px;*/
+    top: 80px;
+    width: 40%;
+    font-size: 3em;
+  }
+
+.sign-right{
+  /*width: 50%;*/
+  padding-top: 100px;
+  float: left;
+}
+  .sign-right .section{
+    margin-top: 50px;
+  }
+  .label{
+    margin-bottom: 5px;
+  }
+  .textbox input{
+    font-size: 1.2em;
+    width: 240px;
+  }
+  .iniciar{
+    float: left;
+    color: white;
+    background-color: #1E82CC;
+    font-weight: bold;
+    margin-top: 25px;
+    height: 2.1em;
+    line-height: 2.1em;
+    font-size: 0.9em;
+    padding: 3px 12px 5px;
+  }
+  .iniciar:hover{
+    background-color: #4173c9;
+    cursor: pointer;
+  }
+  .new{
+    margin-top: 100px;
+  }
+  .new:hover{
+    color: #4173c9;
+    cursor: pointer;
+  }
+  .titel{
+    margin-bottom: 25px;
+    font-size: 24px;
+  }
+  .section{
+    width: 50%;
+    float: left;
+  }
+  .center-step{
+    text-align: center;
+    font-size: 25px;
+  }
+  .step{
+    background-color: #4173c9;
+    margin: 0px 100px 20px 100px;
+    line-height: 50px;
+    color: white;
+  }
+  .step2{
+    background-color: #8FAEE4;
+    margin: 0px 100px 20px 100px;
+    line-height: 50px;
+    color: white;
+  }
