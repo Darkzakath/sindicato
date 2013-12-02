@@ -12,7 +12,8 @@
 		<div class="home-header">Header a definir</div>
 		<div class="home-left">
 			<ul>
-				<li><span class="fonts-menu">_</span>Consultas</li>
+				<li>Home</li>
+				<li>Consultas</li>
 				<li>Nomina de trabajadores</li>
 				<li>imprimir boletas</li>
 				<li>Historial de boletas</li>
