@@ -17,6 +17,7 @@ function getConnection() {
 require 'Slim/Slim.php';
 
 \Slim\Slim::registerAutoloader();
+// Instantiate a new Slim application
 $app = new \Slim\Slim();
 
 $app->get('/', function () use ($app){

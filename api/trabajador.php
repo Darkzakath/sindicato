@@ -4,80 +4,110 @@ require 'Slim/Slim.php';
 
 $app = new Slim();
 
-$app->get('/trabajadores', 'getTrabajadores');
-$app->get('/trabajadores/:id',	'getTrabajador');
-$app->get('/trabajadores/search/:query', 'findByName');
-$app->post('/trabajadores', 'addTrabajador');
+$app->get('/trabajadores', 'getTrabajadores' use ($app) );
+$app->get('/trabajadores/:id',	'getTrabajador' use ($app) );
+$app->get('/trabajadores/search/:query', 'findByName' use ($app));
+$app->post('/trabajadores', 'addTrabajador' use ($app) );
 $app->put('/trabajadores/:id', 'updateTrabajador');
 $app->delete('/trabajadores/:id',	'deleteTrabajador');
 
 $app->run();
 
-function getTrabajadores() {
+function getTrabajadores(){
 
-	$sql = "select * FROM trabajadores ORDER BY name";
-	try {
-		$db = getConnection();
-		$stmt = $db->query($sql);  
-		$trabajadores = $stmt->fetchAll(PDO::FETCH_OBJ);
-		$db = null;
-		echo json_encode($trabajadores);
-	} catch(PDOException $e) {
-		//echo '{"error":{"text":'. $e->getMessage() .'}}'; 
-	}
+	global $sql;
+	$query = "SELECT * FROM trabajadores WHERE deleted = 0";
+	$resource = $sql->query($query);
+
+	$response = $app->response();
+	$response['Content-Type'] = 'application/json';
+
+	if ($resource === false) {
+		$app->response()->status(400);
+	} else {
+		$ret_array = array();
+		while($row = $resource->fetch_assoc()){
+			$ret_array[] = $row;
+		};
+		$response->write(json_encode($ret_array));
+	};
 }
 
-function getTrabajador($id) {
+function getTrabajador($id){
 
-	$sql = "SELECT * FROM trabajadores WHERE id=:id";
-	try {
-		$db = getConnection();
-		$stmt = $db->prepare($sql);  
-		$stmt->bindParam("id", $id);
-		$stmt->execute();
-		$trabajadores = $stmt->fetchObject();  
-		$db = null;
-		echo json_encode($trabajadores); 
-	} catch(PDOException $e) {
-		//echo '{"error":{"text":'. $e->getMessage() .'}}'; 
-	}
+	global $sql;
+	$query = "SELECT * FROM trabajadores WHERE deleted = 0 AND id = " . $id;
+	$resource = $sql->query($query);
+
+	$response = $app->response();
+	$response['Content-Type'] = 'application/json';
+
+	if ($resource === false) {
+		response()->status(400);
+	} else {
+		$obj = $resource->fetch_assoc();
+
+		if (is_null($obj)) {
+			response()->status(400);
+		} else {
+			$response->write(json_encode($obj));
+		};
+	};
 }
 
 function addTrabajador() {
-	global $sql;
 
+	global $sql;
 	$json = json_decode($app->request()->getBody(), true);
-	
+
 	if (is_null($json)) {
 		response()->status(400);
 		return;
 	}
-	
 	$sql->autocommit(FALSE);
-	$sql = "INSERT INTO trabajadores (nombre, apellido, cuil, fingreso, categoria) VALUES (:nombre, :apellido, :cuil, :fingreso, :categoria)";
 
-	//$id = $bluesystem->createObject("book", $json);
-	try{
-		$db = getConnection();
-		$stmt = $db->prepare($sql);  
-		$stmt->bindParam("nombre", $json->nombre);
-		$stmt->bindParam("apellido", $json->apellido);
-		$stmt->bindParam("cuil", $json->cuil);
-		$stmt->bindParam("fingreso", $json->fingreso);
-		$stmt->bindParam("categoria", $json->categoria);
-		$stmt->execute();
-		$json->id = $db->lastInsertId();
-		$db = null;
-		echo json_encode($json);
-	} catch(PDOException $e) {
+	$id = $bluesystem->createObject("trabajador", $json);
+	
+	if ($id) {
+		$bluesystem->handler->commit();
+		$app->response()->write($id);
+	} else {
 		response()->status(400);
-	}
+	};
 }
 
-function updateTrabajador($id) {}
+function updateTrabajador($id) {
 
-function deleteTrabajador($id) {}
+	global $sql;
+	$json = json_decode($app->request()->getBody(), true);
+	$query = "SELECT * FROM trabajadores WHERE deleted = 0 AND id = " . $id;
+	$resource = $sql->query($query);
 
-function findByName($query) {}
+	$response = $app->response();
+	$response['Content-Type'] = 'application/json';
+
+	$sql->autocommit(FALSE);
+	$id = $bluesystem->createObject("trabajador", $json);
+
+	if ($resource === false && is_null($json)) {
+		response()->status(400);
+	} else {
+		$obj = $resource->fetch_assoc();
+
+		if (is_null($obj)) {
+			response()->status(400);
+		} else {
+			$bluesystem->handler->commit();
+			$app->response()->write($id);
+		};
+	};
+}
+
+function deleteTrabajador($id) {
+
+}
+
+function findByName($query) {
+}
 
 ?>

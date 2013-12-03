@@ -43,7 +43,7 @@ $app->get('/test/:id', function ($id) use ($app){
 	};
 });
 
-$app->post('/test', function ($id) use ($app){
+$app->post('/test', function ($id){
 	global $sql;
 
 	$json = json_decode($app->request()->getBody(), true);
@@ -64,7 +64,8 @@ $app->post('/test', function ($id) use ($app){
 	};
 });
 
-$app->put('/test/:id', function ($id) use ($app){});
+$app->put('/test/:id', function ($id) {
+});
 
 $app->delete('/test/:id', function ($id) use ($app){
 	
