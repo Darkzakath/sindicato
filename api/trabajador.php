@@ -1,19 +1,10 @@
 <?php
 
-require 'Slim/Slim.php';
+//require 'Slim/Slim.php';
 
-$app = new Slim();
+//$app = new Slim();
 
-$app->get('/trabajadores', 'getTrabajadores' use ($app) );
-$app->get('/trabajadores/:id',	'getTrabajador' use ($app) );
-$app->get('/trabajadores/search/:query', 'findByName' use ($app));
-$app->post('/trabajadores', 'addTrabajador' use ($app) );
-$app->put('/trabajadores/:id', 'updateTrabajador');
-$app->delete('/trabajadores/:id',	'deleteTrabajador');
-
-$app->run();
-
-function getTrabajadores(){
+$app->get('/trabajadores', function() use ($app){
 
 	global $sql;
 	$query = "SELECT * FROM trabajadores WHERE deleted = 0";
@@ -31,9 +22,9 @@ function getTrabajadores(){
 		};
 		$response->write(json_encode($ret_array));
 	};
-}
+});
 
-function getTrabajador($id){
+$app->get('/trabajadores/:id', function($id) use ($app){
 
 	global $sql;
 	$query = "SELECT * FROM trabajadores WHERE deleted = 0 AND id = " . $id;
@@ -53,9 +44,9 @@ function getTrabajador($id){
 			$response->write(json_encode($obj));
 		};
 	};
-}
+});
 
-function addTrabajador() {
+$app->post('/trabajadores', function() use ($app){
 
 	global $sql;
 	$json = json_decode($app->request()->getBody(), true);
@@ -74,9 +65,9 @@ function addTrabajador() {
 	} else {
 		response()->status(400);
 	};
-}
+});
 
-function updateTrabajador($id) {
+$app->put('/trabajadores/:id', function ($id) use ($app){
 
 	global $sql;
 	$json = json_decode($app->request()->getBody(), true);
@@ -101,13 +92,29 @@ function updateTrabajador($id) {
 			$app->response()->write($id);
 		};
 	};
-}
+});
 
-function deleteTrabajador($id) {
+$app->delete('/trabajadores/:id', function ($id) use ($app){
+	
+	global $sql;
+	$query = "SELECT * FROM trabajadores WHERE deleted = 0 AND id = " . $id;
+	$resource = $sql->query($query);
 
-}
+	$response = $app->response();
+	$response['Content-Type'] = 'application/json';
 
-function findByName($query) {
-}
+	if ($resource === false) {
+		response()->status(400);
+	} else {
+		$obj = $resource->fetch_assoc();
+
+		if (is_null($obj)) {
+			response()->status(400);
+		} else {
+			// cambiar el flag
+			$response->write(json_encode($obj));
+		};
+	};
+});
 
 ?>
