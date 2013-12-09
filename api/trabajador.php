@@ -1,10 +1,19 @@
 <?php
 
-//require 'Slim/Slim.php';
+require 'Slim/Slim.php';
 
-//$app = new Slim();
+$app = new Slim();
 
-$app->get('/trabajadores', function() use ($app){
+$app->get('/trabajadores', 'getTrabajadores' use ($app) );
+$app->get('/trabajadores/:id',	'getTrabajador' use ($app) );
+$app->get('/trabajadores/search/:query', 'findByName' use ($app));
+$app->post('/trabajadores', 'addTrabajador' use ($app) );
+$app->put('/trabajadores/:id', 'updateTrabajador');
+$app->delete('/trabajadores/:id',	'deleteTrabajador');
+
+$app->run();
+
+function getTrabajadores(){
 
 	global $sql;
 	$query = "SELECT * FROM trabajadores WHERE deleted = 0";
@@ -22,9 +31,9 @@ $app->get('/trabajadores', function() use ($app){
 		};
 		$response->write(json_encode($ret_array));
 	};
-});
+}
 
-$app->get('/trabajadores/:id', function($id) use ($app){
+function getTrabajador($id){
 
 	global $sql;
 	$query = "SELECT * FROM trabajadores WHERE deleted = 0 AND id = " . $id;
@@ -44,9 +53,9 @@ $app->get('/trabajadores/:id', function($id) use ($app){
 			$response->write(json_encode($obj));
 		};
 	};
-});
+}
 
-$app->post('/trabajadores', function() use ($app){
+function addTrabajador() {
 
 	global $sql;
 	$json = json_decode($app->request()->getBody(), true);
@@ -65,9 +74,9 @@ $app->post('/trabajadores', function() use ($app){
 	} else {
 		response()->status(400);
 	};
-});
+}
 
-$app->put('/trabajadores/:id', function ($id) use ($app){
+function updateTrabajador($id) {
 
 	global $sql;
 	$json = json_decode($app->request()->getBody(), true);
@@ -92,29 +101,13 @@ $app->put('/trabajadores/:id', function ($id) use ($app){
 			$app->response()->write($id);
 		};
 	};
-});
+}
 
-$app->delete('/trabajadores/:id', function ($id) use ($app){
-	
-	global $sql;
-	$query = "SELECT * FROM trabajadores WHERE deleted = 0 AND id = " . $id;
-	$resource = $sql->query($query);
+function deleteTrabajador($id) {
 
-	$response = $app->response();
-	$response['Content-Type'] = 'application/json';
+}
 
-	if ($resource === false) {
-		response()->status(400);
-	} else {
-		$obj = $resource->fetch_assoc();
-
-		if (is_null($obj)) {
-			response()->status(400);
-		} else {
-			// cambiar el flag
-			$response->write(json_encode($obj));
-		};
-	};
-});
+function findByName($query) {
+}
 
 ?>
