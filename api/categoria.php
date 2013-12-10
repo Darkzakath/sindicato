@@ -78,7 +78,7 @@ $app->put('/categorias/:id', function ($id) use ($app){
 	$response['Content-Type'] = 'application/json';
 
 	$sql->autocommit(FALSE);
-	$id = $bluesystem->createObject("trabajador", $json);
+	$id = $bluesystem->createObject("categoria", $json);
 
 	if ($resource === false && is_null($json)) {
 		response()->status(400);

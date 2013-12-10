@@ -25,6 +25,11 @@ $app->get('/', function () use ($app){
 });
 
 require 'test.php';
+require 'trabajador.php';
+require 'empresa.php';
+require 'categoria.php';
+require 'boleta.php';
+require 'administrador.php';
 
 $sql = getConnection();
 $app->run();

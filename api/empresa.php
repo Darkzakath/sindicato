@@ -1,54 +1,120 @@
 <?php
 
-require 'Slim/Slim.php';
+//require 'Slim/Slim.php';
 
-$app = new Slim();
+//$app = new Slim();
 
-$app->get('/empresas', 'getEmpresas');
-$app->get('/empresas/:id',	'getEmpresa');
-$app->get('/empresas/search/:query', 'findByName');
-$app->post('/empresas', 'addEmpresa');
-$app->put('/empresas/:id', 'updateEmpresa');
-$app->delete('/empresas/:id',	'deleteEmpresa');
+$app->get('/empresas', function() use ($app){
 
-$app->run();
+	global $sql;
+	$query = "SELECT * FROM empresas WHERE deleted = 0";
+	$resource = $sql->query($query);
 
-function getEmpresas() {
+	$response = $app->response();
+	$response['Content-Type'] = 'application/json';
 
-	$sql = "select * FROM empresa ORDER BY name";
-	try {
-		$db = getConnection();
-		$stmt = $db->query($sql);  
-		$empresas = $stmt->fetchAll(PDO::FETCH_OBJ);
-		$db = null;
-		echo json_encode($empresas);
-	} catch(PDOException $e) {
-		echo '{"error":{"text":'. $e->getMessage() .'}}'; 
+	if ($resource === false) {
+		$app->response()->status(400);
+	} else {
+		$ret_array = array();
+		while($row = $resource->fetch_assoc()){
+			$ret_array[] = $row;
+		};
+		$response->write(json_encode($ret_array));
+	};
+});
+
+$app->get('/empresas/:id', function($id) use ($app){
+
+	global $sql;
+	$query = "SELECT * FROM empresas WHERE deleted = 0 AND id = " . $id;
+	$resource = $sql->query($query);
+
+	$response = $app->response();
+	$response['Content-Type'] = 'application/json';
+
+	if ($resource === false) {
+		response()->status(400);
+	} else {
+		$obj = $resource->fetch_assoc();
+
+		if (is_null($obj)) {
+			response()->status(400);
+		} else {
+			$response->write(json_encode($obj));
+		};
+	};
+});
+
+$app->post('/empresas', function() use ($app){
+
+	global $sql;
+	$json = json_decode($app->request()->getBody(), true);
+
+	if (is_null($json)) {
+		response()->status(400);
+		return;
 	}
-}
+	$sql->autocommit(FALSE);
 
-function getEmpresa($id) {
+	$id = $bluesystem->createObject("empresa", $json);
+	
+	if ($id) {
+		$bluesystem->handler->commit();
+		$app->response()->write($id);
+	} else {
+		response()->status(400);
+	};
+});
 
-	$sql = "SELECT * FROM empresa WHERE id=:id";
-	try {
-		$db = getConnection();
-		$stmt = $db->prepare($sql);  
-		$stmt->bindParam("id", $id);
-		$stmt->execute();
-		$empresas = $stmt->fetchObject();  
-		$db = null;
-		echo json_encode($empresas); 
-	} catch(PDOException $e) {
-		echo '{"error":{"text":'. $e->getMessage() .'}}'; 
-	}
-}
+$app->put('/empresas/:id', function ($id) use ($app){
 
-function addEmpresa() {}
+	global $sql;
+	$json = json_decode($app->request()->getBody(), true);
+	$query = "SELECT * FROM empresas WHERE deleted = 0 AND id = " . $id;
+	$resource = $sql->query($query);
 
-function updateEmpresa($id) {}
+	$response = $app->response();
+	$response['Content-Type'] = 'application/json';
 
-function deleteEmpresa($id) {}
+	$sql->autocommit(FALSE);
+	$id = $bluesystem->createObject("empresa", $json);
 
-function findByName($query) {}
+	if ($resource === false && is_null($json)) {
+		response()->status(400);
+	} else {
+		$obj = $resource->fetch_assoc();
+
+		if (is_null($obj)) {
+			response()->status(400);
+		} else {
+			$bluesystem->handler->commit();
+			$app->response()->write($id);
+		};
+	};
+});
+
+$app->delete('/empresas/:id', function ($id) use ($app){
+	
+	global $sql;
+	$query = "SELECT * FROM empresas WHERE deleted = 0 AND id = " . $id;
+	$resource = $sql->query($query);
+
+	$response = $app->response();
+	$response['Content-Type'] = 'application/json';
+
+	if ($resource === false) {
+		response()->status(400);
+	} else {
+		$obj = $resource->fetch_assoc();
+
+		if (is_null($obj)) {
+			response()->status(400);
+		} else {
+			// cambiar el flag
+			$response->write(json_encode($obj));
+		};
+	};
+});
 
 ?>
