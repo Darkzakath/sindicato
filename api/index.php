@@ -19,11 +19,12 @@ $config_file = 'sindicato.json';
 $config_data = file_get_contents($config_file);
 $config_json = json_decode($config_data, true);
 $system = new \nd\neodymium($config_json);
+$system->startApp("web");
 
 $app->get('/', function () use ($app){
     $response = $app->response();
     $response['Content-Type'] = 'application/json';
-    $response->write('sdkjfhjjkfads');
+    $response->write('nothing');
 });
 
 require 'users.php';

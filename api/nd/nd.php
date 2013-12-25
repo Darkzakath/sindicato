@@ -371,7 +371,7 @@ class neodymium {
                 for ($i = 0; $i < $len; $i++) {
                         $return_fields[$fields[$i]["name"]] = $fields[$i];
                 };
-                if ($obj["nd_fields"]) $return_fields = array_merge(ndlite::$nd_fields, $return_fields);
+                if ($obj["nd_fields"]) $return_fields = array_merge(neodymium::$nd_fields, $return_fields);
                 return $return_fields;
         }
 

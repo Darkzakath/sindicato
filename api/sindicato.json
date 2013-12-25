@@ -26,35 +26,34 @@
 			"nd_fields": true,
 			"fields": [
 				{
-					"name": "name",
-					"default": "[no name]",
+					"name": "username",
 					"type": "string"
 				},
 				{
-					"name": "number",
-					"default": 0,
-					"type": "number"
+					"name": "name",
+					"type": "string"
 				},
 				{
-					"name": "scopies",
-					"default": 0,
-					"type": "number"
+					"name": "lastname",
+					"type": "string"
 				},
 				{
-					"name": "dcopies",
-					"default": 0,
-					"type": "number"
+					"name": "password",
+					"type": "string"
 				},
 				{
-					"name": "ringing",
-					"default": 0,
-					"type": "object",
-					"object_name": "ringing"
+					"name": "email",
+					"type": "string"
 				},
 				{
-					"name": "folder",
-					"type": "array",
-					"relation_name": "booksTree"
+					"name": "active",
+					"default": true,
+					"type": "bool"
+				},
+				{
+					"name": "admin",
+					"default": false,
+					"type": "bool"
 				}
 
 			]

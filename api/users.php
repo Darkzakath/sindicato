@@ -1,78 +1,136 @@
 <?php
 
-$app->get('/users/', function() use ($app){   
-    die('sasdfasdf');
-    global $bluesystem;
-    $ret = $bluesystem->readObjectList("user");	
+$app->get('/users/', function() use ($app, $system){   
+    $ret = $system->readObjectList("user");	
 	$response = $app->response();
 	$response['Content-Type'] = 'application/json';
-	if ($ret) {
+	if (!is_null($ret)) {
 		$response->write(json_encode($ret));	
 	} else {
-		\ndlite\badSql();
+	    $response = $app->response();
+	    $response->status(400);
+    	$response['Content-Type'] = 'application/json';
+    	
+	    $err = new \nd\response;
+	    $err->$error_no = $system->handler->errno;
+	    $err->$message = $system->handler->error;
+	    
+	    $response->write($err->toJson());
 	};
 });
 
-$app->get('/users/:id', function($id) use ($app){
-	global $bluesystem;
-	$ret = $bluesystem->readObject("user", $id);
+$app->get('/users/:id', function($id) use ($app, $system){
+	$ret = $system->readObject("user", $id);
 	$response = $app->response();
 	$response['Content-Type'] = 'application/json';
 	if ($ret) {
 		$response->write(json_encode($ret));	
 	} else {
-		\ndlite\badSql();
+	    $response->status(400);
+    	$response['Content-Type'] = 'application/json';
+    	
+	    $err = new \nd\response;
+	    $err->error_no = $system->handler->errno;
+	    $err->message = $system->handler->error;
+	    
+	    $response->write($err->toJson());
 	};	
 });
 
-$app->post('/users', function() use ($app){
-	global $bluesystem;
+$app->post('/users', function() use ($app, $system){
 	$json = json_decode($app->request()->getBody(), true);
 	if (is_null($json)) {
-		\ndlite\badJSON();
+		$response = $app->response();
+	    $response->status(400);
+    	$response['Content-Type'] = 'application/json';
+    	
+	    $err = new \nd\response;
+	    $err->error_no = 1000;
+	    $err->message = "Bad JSON";
+	    
+	    $response->write($err->toJson());
 		return;
 	}
-	$bluesystem->handler->autocommit(FALSE);
-	$id = $bluesystem->createObject("user", $json);
+	$system->handler->autocommit(FALSE);
+	$id = $system->createObject("user", $json);
 	if ($id) {
-		$bluesystem->handler->commit();
+		$system->handler->commit();
 		$app->response()->write($id);
 	} else {
-		\ndlite\badSql();
+		$response = $app->response();
+	    $response->status(400);
+    	$response['Content-Type'] = 'application/json';
+    	
+	    $err = new \nd\response;
+	    $err->error_no = $system->handler->errno;
+	    $err->message = $system->handler->error;
+	    
+	    $response->write($err->toJson());
 	};
 });
 
 $app->put('/users/:id', function($id) use ($app){
-	global $bluesystem;
+	global $system;
     $json = json_decode($app->request()->getBody(), true);
 	if (is_null($json)) {
-		\ndlite\badJSON();
+		$response = $app->response();
+	    $response->status(400);
+    	$response['Content-Type'] = 'application/json';
+    	
+	    $err = new \nd\response;
+	    $err->error_no = $system->handler->errno;
+	    $err->message = $system->handler->error;
+	    
+	    $response->write($err->toJson());
 		return;
 	}
-	$bluesystem->handler->autocommit(false);
-	$ok = $bluesystem->updateObject("user", $id, $json);
+	$system->handler->autocommit(false);
+	$ok = $system->updateObject("user", $id, $json);
 	if ($ok) {
-		$bluesystem->handler->commit();
+		$system->handler->commit();
 		//$app->response()->write($id);
 	} else {
-		\ndlite\badSql();
+		$response = $app->response();
+	    $response->status(400);
+    	$response['Content-Type'] = 'application/json';
+    	
+	    $err = new \nd\response;
+	    $err->error_no = $system->handler->errno;
+	    $err->message = $system->handler->error;
+	    
+	    $response->write($err->toJson());
 	};
 });
 
-$app->delete('/users/:id', function($id) use ($app){
-	global $bluesystem;
+$app->delete('/users/:id', function($id) use ($app, $system){
     $json = json_decode($app->request()->getBody(), true);
 	if (is_null($json)) {
-		\ndlite\badJSON();
+		$response = $app->response();
+	    $response->status(400);
+    	$response['Content-Type'] = 'application/json';
+    	
+	    $err = new \nd\response;
+	    $err->error_no = 1000;
+	    $err->message = "Bad JSON";
+	    
+	    $response->write($err->toJson());
 		return;
 	}
-	$bluesystem->handler->autocommit(FALSE);
-	$id = $bluesystem->createObject("user", $json);
+	$system->handler->autocommit(FALSE);
+	$id = $system->createObject("user", $json);
 	if ($id) {
-		$bluesystem->handler->commit();
+		$system->handler->commit();
 		$app->response()->write($id);
 	} else {
-		\ndlite\badSql();
+		$response = $app->response();
+	    $response->status(400);
+    	$response['Content-Type'] = 'application/json';
+    	
+	    $err = new \nd\response;
+	    $err->error_no = $system->handler->errno;
+	    $err->message = $system->handler->error;
+	    
+	    $response->write($err->toJson());
 	};
 });
 
