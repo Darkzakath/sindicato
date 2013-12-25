@@ -1,8 +1,8 @@
 {
 	"meta": {},
 	"config": {
-		"version" : "2.0.0",
-		"system_name" : "bluesystem"
+		"version" : "1.0.0",
+		"system_name" : "sindicato"
 	},
 	"objects": [
 		{
