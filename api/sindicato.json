@@ -1,0 +1,146 @@
+{
+	"meta": {},
+	"config": {
+		"version" : "2.0.0",
+		"system_name" : "bluesystem"
+	},
+	"objects": [
+		{
+			"name": "ringing",
+			"nd_fields": true,
+			"fields": [
+				{
+					"name": "name",
+					"default": "[no name]",
+					"type": "string"
+				},
+				{
+					"name": "cost",
+					"default": 0.0,
+					"type": "decimal"
+				}
+			]
+		},
+		{
+			"name": "user",
+			"nd_fields": true,
+			"fields": [
+				{
+					"name": "name",
+					"default": "[no name]",
+					"type": "string"
+				},
+				{
+					"name": "number",
+					"default": 0,
+					"type": "number"
+				},
+				{
+					"name": "scopies",
+					"default": 0,
+					"type": "number"
+				},
+				{
+					"name": "dcopies",
+					"default": 0,
+					"type": "number"
+				},
+				{
+					"name": "ringing",
+					"default": 0,
+					"type": "object",
+					"object_name": "ringing"
+				},
+				{
+					"name": "folder",
+					"type": "array",
+					"relation_name": "booksTree"
+				}
+
+			]
+		}
+	],
+	"relations": [	],
+	"storages": [
+		{
+			"name": "webapi",
+			"type": "api",
+			"url": "http://api.fotocasitaazul.com.ar",
+			"base_uri": "/"
+		},
+		{
+			"name": "webapi-dev",
+			"type": "api",
+			"url": "http://dev.fotocasitaazul.com.ar",
+			"base_uri": "/api"
+		},
+		{
+			"name": "webapi-qa",
+			"type": "api",
+			"url": "http://qa.fotocasitaazul.com.ar",
+			"base_uri": "/api"
+		},
+		{
+			"name": "mysql-php-dev",
+			"type": "database",
+			"db_host": "hostingbahia3.com.ar",
+			"db_name": "goldmoll_sindicato",
+			"db_user": "goldmoll_user",
+			"db_pass": "a9GnAeJL",
+			"db_port": 3061,
+			"db_type": "mysql"
+
+		},
+		{
+			"name": "mysql-php-qa",
+			"type": "database",
+			"db_host": "localhost",
+			"db_name": "fotocasi_qa_bluesystem",
+			"db_user": "fotocasi_user",
+			"db_pass": "lokithor",
+			"db_port": 3061,
+			"db_type": "mysql"
+
+		},
+		{
+			"name": "mysql-php",
+			"type": "database",
+			"db_host": "localhost",
+			"db_name": "fotocasi_bluesystem",
+			"db_user": "fotocasi_user",
+			"db_pass": "lokithor",
+			"db_port": 3061,
+			"db_type": "mysql"
+
+		}
+	],
+	"apps": {
+		"pc": {
+			"storage": ["webapi-dev"],
+			"map": {
+					"workorder_page": "/pages",
+					"workorder": "/workorder",
+					"business": "/business",
+					"job": "/jobs",
+					"client": "/clients",
+					"userstamp": "/userstamp",
+					"userlog": "/userlog",
+					"user": "/users",
+					"book": "/books",
+					"ringing": "/ringing",
+					"ringingBusiness": "/business/:oid/ringing",
+					"businessBook": "/business/:oid/books",
+					"validUsers": "/business/:oid/users",
+					"workorderJobs": "/jobs/:oid/jobs",
+					"pages": "/workorder/:oid/pages",
+					"booksTree": "/books/:oid/books"
+				}
+			},
+		"web": {
+			"storage": ["mysql-php-dev"],
+			"map": {
+					"user": "users"
+				}
+			}
+	}	
+}

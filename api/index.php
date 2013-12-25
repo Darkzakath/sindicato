@@ -4,34 +4,23 @@ header("Access-Control-Allow-Origin: *");
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: X-Requested-With');
 
-// helper functions
-function getConnection() {
-	$dbhost="hostingbahia3.com.ar";
-	$dbuser="goldmoll_user";
-	$dbpass="a9GnAeJL";
-	$dbname="goldmoll_sindicato";
-	$handler = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-	return $habdler;
-}
-
 require 'Slim/Slim.php';
+require 'nd/nd.php';
 
 \Slim\Slim::registerAutoloader();
+
 // Instantiate a new Slim application
-$app = new \Slim\Slim();
+$app = new \Slim\Slim(array(
+    'debug' => true,
+    'log.level' => \Slim\Log::DEBUG
+));
 
 $app->get('/', function () use ($app){
-    echo "Undefined";
+    $app->response()->write('hola');
 });
 
-require 'test.php';
-require 'trabajador.php';
-require 'empresa.php';
-require 'categoria.php';
-require 'boleta.php';
-require 'administrador.php';
+require 'users.php';
 
-$sql = getConnection();
 $app->run();
 
 ?>
