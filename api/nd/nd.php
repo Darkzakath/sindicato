@@ -297,8 +297,8 @@ class neodymium {
         }
 
         public function deleteObject($obj_name, $id) {
-                if (isset($id)) return false;
-                $query = "UPDATE " . $this->apps["map"][$obj_name] . " SET delete = 1 ";
+                if (!isset($id)) return false;
+                $query = "UPDATE " . $this->app["map"][$obj_name] . " SET deleted = 1 ";
                 $query .= " WHERE id = " . $id;
                 return $this->handler->query($query);
         }
