@@ -6,22 +6,6 @@
 	},
 	"objects": [
 		{
-			"name": "ringing",
-			"nd_fields": true,
-			"fields": [
-				{
-					"name": "name",
-					"default": "[no name]",
-					"type": "string"
-				},
-				{
-					"name": "cost",
-					"default": 0.0,
-					"type": "decimal"
-				}
-			]
-		},
-		{
 			"name": "user",
 			"nd_fields": true,
 			"fields": [
@@ -55,7 +39,144 @@
 					"default": false,
 					"type": "bool"
 				}
-
+			]
+		},
+		{
+			"name": "trabajadores",
+			"nd_fields": true,
+			"fields": [
+				{
+					"name": "apellido",
+					"type": "string"
+				},
+				{
+					"name": "nombre",
+					"type": "string"
+				},
+				{
+					"name": "categoria",
+					"type": "string"
+				},
+				{
+					"name": "cuil",
+					"type": "string"
+				},
+				{
+					"name": "fingreso",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"name": "administradores",
+			"nd_fields": true,
+			"fields": [
+				{
+					"name": "apellido",
+					"type": "string"
+				},
+				{
+					"name": "nombre",
+					"type": "string"
+				},
+				{
+					"name": "telefono",
+					"type": "int"
+				}
+			]
+		},
+		{
+			"name": "categorias",
+			"nd_fields": true,
+			"fields": [
+				{
+					"name": "antiguedad",
+					"type": ""
+				},
+				{
+					"name": "desde",
+					"type": "date"
+				},
+				{
+					"name": "hasta",
+					"type": "date"
+				},
+				{
+					"name": "monto",
+					"type": ""
+				},
+				{
+					"name": "nivel",
+					"type": ""
+				},
+				{
+					"name": "vale",
+					"type": ""
+				}
+			]
+		},
+		{
+			"name": "empresas",
+			"nd_fields": true,
+			"fields": [
+				{
+					"name": "correo",
+					"type": "string"
+				},
+				{
+					"name": "cuit",
+					"type": "int"
+				},
+				{
+					"name": "domicilio",
+					"type": "string"
+				},
+				{
+					"name": "localidad",
+					"type": "string"
+				},
+				{
+					"name": "nombre",
+					"type": "string"
+				},
+				{
+					"name": "razonsocial",
+					"type": "string"
+				},
+				{
+					"name": "telefono",
+					"type": "int"
+				}
+			]
+		},
+		{
+			"name": "boletas",
+			"nd_fields": true,
+			"fields": [
+				{
+					"name": "antiguedad",
+					"type": ""
+				},
+				{
+					"name": "desde",
+					"type": "date"
+				},
+				{
+					"name": "hasta",
+					"type": "date"
+				},
+				{
+					"name": "monto",
+					"type": ""
+				},
+				{
+					"name": "nivel",
+					"type": ""
+				},
+				{
+					"name": "vale",
+					"type": ""
+				}
 			]
 		}
 	],
