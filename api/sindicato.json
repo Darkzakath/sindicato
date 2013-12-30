@@ -42,7 +42,7 @@
 			]
 		},
 		{
-			"name": "trabajadores",
+			"name": "trabajador",
 			"nd_fields": true,
 			"fields": [
 				{
@@ -81,7 +81,7 @@
 				},
 				{
 					"name": "telefono",
-					"type": "int"
+					"type": "string"
 				}
 			]
 		},
@@ -103,15 +103,15 @@
 				},
 				{
 					"name": "monto",
-					"type": ""
+					"type": "decimal"
 				},
 				{
 					"name": "nivel",
-					"type": ""
+					"type": "decimal"
 				},
 				{
 					"name": "vale",
-					"type": ""
+					"type": "decimal"
 				}
 			]
 		},
@@ -145,7 +145,12 @@
 				},
 				{
 					"name": "telefono",
-					"type": "int"
+					"type": "string"
+				},
+				{
+				    "name": "trabajadores",
+				    "type": "array",
+				    "relation_name": "empresaTrabajador"
 				}
 			]
 		},
@@ -155,7 +160,7 @@
 			"fields": [
 				{
 					"name": "antiguedad",
-					"type": ""
+					"type": "numeric"
 				},
 				{
 					"name": "desde",
@@ -167,20 +172,35 @@
 				},
 				{
 					"name": "monto",
-					"type": ""
+					"type": "decimal"
 				},
 				{
 					"name": "nivel",
-					"type": ""
+					"type": "decimal"
 				},
 				{
 					"name": "vale",
-					"type": ""
+					"type": "decimal"
 				}
 			]
 		}
 	],
-	"relations": [	],
+	"relations": [
+	    {
+	        "name": "empresaTrabajador",
+	        "nd_fields": true,
+	        "object_from": "empresa",
+	        "type": "one-to-many",
+	        "object_to": "trabajadores",
+	    },
+	    {
+			"name": "booksTree",
+			"nd_fields": true,
+			"type": "many-to-many",
+			"object_from": "book",
+			"object_to": "book"
+		}
+	],
 	"storages": [
 		{
 			"name": "webapi",
@@ -214,10 +234,10 @@
 		{
 			"name": "mysql-php-qa",
 			"type": "database",
-			"db_host": "localhost",
-			"db_name": "fotocasi_qa_bluesystem",
-			"db_user": "fotocasi_user",
-			"db_pass": "lokithor",
+			"db_host": "hostingbahia3.com.ar",
+			"db_name": "goldmoll_asindicato",
+			"db_user": "goldmoll_user",
+			"db_pass": "a9GnAeJL",
 			"db_port": 3061,
 			"db_type": "mysql"
 
@@ -225,41 +245,23 @@
 		{
 			"name": "mysql-php",
 			"type": "database",
-			"db_host": "localhost",
-			"db_name": "fotocasi_bluesystem",
-			"db_user": "fotocasi_user",
-			"db_pass": "lokithor",
+			"db_host": "hostingbahia3.com.ar",
+			"db_name": "goldmoll_sindicato",
+			"db_user": "goldmoll_user",
+			"db_pass": "a9GnAeJL",
 			"db_port": 3061,
 			"db_type": "mysql"
 
 		}
 	],
 	"apps": {
-		"pc": {
-			"storage": ["webapi-dev"],
-			"map": {
-					"workorder_page": "/pages",
-					"workorder": "/workorder",
-					"business": "/business",
-					"job": "/jobs",
-					"client": "/clients",
-					"userstamp": "/userstamp",
-					"userlog": "/userlog",
-					"user": "/users",
-					"book": "/books",
-					"ringing": "/ringing",
-					"ringingBusiness": "/business/:oid/ringing",
-					"businessBook": "/business/:oid/books",
-					"validUsers": "/business/:oid/users",
-					"workorderJobs": "/jobs/:oid/jobs",
-					"pages": "/workorder/:oid/pages",
-					"booksTree": "/books/:oid/books"
-				}
-			},
 		"web": {
 			"storage": ["mysql-php-dev"],
 			"map": {
-					"user": "users"
+					"user": "users",
+					"trabajador": "trabajadores",
+					"empresaTrabajador": "empresa_trabajador"
+					
 				}
 			}
 	}	

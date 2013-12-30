@@ -1,12 +1,21 @@
 <?php
 
 $app->get('/users/', function() use ($app, $system){   
+    // leer todos los objetos tipo user de la db
     $ret = $system->readObjectList("user");	
+    
+    // traer objeto para escribir respuesta
 	$response = $app->response();
+	// seteas la respuesta al navegador que lo que va a volver es un json
 	$response['Content-Type'] = 'application/json';
+	
+	// si la lista de objetos no es nula
 	if (!is_null($ret)) {
+	    // toma toda la lista de objetos y la codifica en json
 		$response->write(json_encode($ret));	
 	} else {
+	    
+	    // como es nula, seteo una respuesta dando el error
 	    $response = $app->response();
 	    $response->status(400);
     	$response['Content-Type'] = 'application/json';
@@ -21,6 +30,7 @@ $app->get('/users/', function() use ($app, $system){
 
 $app->get('/users/:id', function($id) use ($app, $system){
 	$ret = $system->readObject("user", $id);
+	
 	$response = $app->response();
 	$response['Content-Type'] = 'application/json';
 	if ($ret) {
