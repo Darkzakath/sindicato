@@ -27,12 +27,7 @@ $app->get('/', function () use ($app){
     $response->write('nothing');
 });
 
-<<<<<<< HEAD
-require 'test.php';
-require 'trabajador.php';
-=======
 require 'users.php';
->>>>>>> cf0cda4c74d1dcf674aa06b7e7421b51c78071e3
 
 $app->run();
 
