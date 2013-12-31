@@ -1,11 +1,3 @@
-/**
- * RequireJS bootstrap
- *
- * 1) Will load RequireJS's config file, that would set paths, and will shim non-AMD scripts
- * 2) Will call Application's start method to begin the application bootstrap process
- *
- * @author Esteban S. Abait <esteban.abait@globant.com>
- */
 require(
   [
     './js/config.js'
@@ -15,12 +7,10 @@ require(
     //Start ApplicationModule
     require(
       [
-        'app/empresa.model'
+        'app/application'
       ],
       function(Application) {
-        //Application.start();
-        console.log(Application);
+        Application.init();
       });
   }
 );
-

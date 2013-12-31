@@ -2,18 +2,16 @@ define(function() {
   'use strict';
 
   require.config({
-    //path aliases for loaded scripts
+    baseUrl: 'js',
     paths: {
       'backbone' : 'vendors/backbone/backbone-0.9.10',
       'jquery' : 'vendors/jquery/jquery-1.8.0',
       'underscore' : 'vendors/underscore/lodash',
       'handlebars' : 'vendors/handlebars/handlebars-1.0.0.beta.6',
       'modernizr' : 'vendors/modernizr/modernizr-latest',
-      'bootstrap': 'vendors/bootstrap/bootstrap'
+      'bootstrap': 'vendors/bootstrap/bootstrap',
+      'text': 'vendors/require/plugins/text'
     },
-    //load script's dependencies in correct order &
-    //wraps non-AMD scripts into AMD-modules
-    // cosas que compila como modulosque no son modulos
     shim: {
       'underscore' : {
         exports: '_'
