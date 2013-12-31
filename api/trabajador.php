@@ -1,9 +1,5 @@
 <?php
 
-//require 'Slim/Slim.php';
-
-//$app = new Slim();
-
 $app->get('/trabajadores', function() use ($app){
 
 	global $sql;
