@@ -25,6 +25,7 @@ $app->get('/', function () use ($app){
 });
 
 require 'test.php';
+require 'trabajador.php';
 
 $sql = getConnection();
 $app->run();
