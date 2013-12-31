@@ -1,0 +1,268 @@
+{
+	"meta": {},
+	"config": {
+		"version" : "1.0.0",
+		"system_name" : "sindicato"
+	},
+	"objects": [
+		{
+			"name": "user",
+			"nd_fields": true,
+			"fields": [
+				{
+					"name": "username",
+					"type": "string"
+				},
+				{
+					"name": "name",
+					"type": "string"
+				},
+				{
+					"name": "lastname",
+					"type": "string"
+				},
+				{
+					"name": "password",
+					"type": "string"
+				},
+				{
+					"name": "email",
+					"type": "string"
+				},
+				{
+					"name": "active",
+					"default": true,
+					"type": "bool"
+				},
+				{
+					"name": "admin",
+					"default": false,
+					"type": "bool"
+				}
+			]
+		},
+		{
+			"name": "trabajador",
+			"nd_fields": true,
+			"fields": [
+				{
+					"name": "apellido",
+					"type": "string"
+				},
+				{
+					"name": "nombre",
+					"type": "string"
+				},
+				{
+					"name": "categoria",
+					"type": "string"
+				},
+				{
+					"name": "cuil",
+					"type": "string"
+				},
+				{
+					"name": "fingreso",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"name": "administradores",
+			"nd_fields": true,
+			"fields": [
+				{
+					"name": "apellido",
+					"type": "string"
+				},
+				{
+					"name": "nombre",
+					"type": "string"
+				},
+				{
+					"name": "telefono",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"name": "categorias",
+			"nd_fields": true,
+			"fields": [
+				{
+					"name": "antiguedad",
+					"type": ""
+				},
+				{
+					"name": "desde",
+					"type": "date"
+				},
+				{
+					"name": "hasta",
+					"type": "date"
+				},
+				{
+					"name": "monto",
+					"type": "decimal"
+				},
+				{
+					"name": "nivel",
+					"type": "decimal"
+				},
+				{
+					"name": "vale",
+					"type": "decimal"
+				}
+			]
+		},
+		{
+			"name": "empresas",
+			"nd_fields": true,
+			"fields": [
+				{
+					"name": "correo",
+					"type": "string"
+				},
+				{
+					"name": "cuit",
+					"type": "int"
+				},
+				{
+					"name": "domicilio",
+					"type": "string"
+				},
+				{
+					"name": "localidad",
+					"type": "string"
+				},
+				{
+					"name": "nombre",
+					"type": "string"
+				},
+				{
+					"name": "razonsocial",
+					"type": "string"
+				},
+				{
+					"name": "telefono",
+					"type": "string"
+				},
+				{
+				    "name": "trabajadores",
+				    "type": "array",
+				    "relation_name": "empresaTrabajador"
+				}
+			]
+		},
+		{
+			"name": "boletas",
+			"nd_fields": true,
+			"fields": [
+				{
+					"name": "antiguedad",
+					"type": "numeric"
+				},
+				{
+					"name": "desde",
+					"type": "date"
+				},
+				{
+					"name": "hasta",
+					"type": "date"
+				},
+				{
+					"name": "monto",
+					"type": "decimal"
+				},
+				{
+					"name": "nivel",
+					"type": "decimal"
+				},
+				{
+					"name": "vale",
+					"type": "decimal"
+				}
+			]
+		}
+	],
+	"relations": [
+	    {
+	        "name": "empresaTrabajador",
+	        "nd_fields": true,
+	        "object_from": "empresa",
+	        "type": "one-to-many",
+	        "object_to": "trabajadores",
+	    },
+	    {
+			"name": "booksTree",
+			"nd_fields": true,
+			"type": "many-to-many",
+			"object_from": "book",
+			"object_to": "book"
+		}
+	],
+	"storages": [
+		{
+			"name": "webapi",
+			"type": "api",
+			"url": "http://api.fotocasitaazul.com.ar",
+			"base_uri": "/"
+		},
+		{
+			"name": "webapi-dev",
+			"type": "api",
+			"url": "http://dev.fotocasitaazul.com.ar",
+			"base_uri": "/api"
+		},
+		{
+			"name": "webapi-qa",
+			"type": "api",
+			"url": "http://qa.fotocasitaazul.com.ar",
+			"base_uri": "/api"
+		},
+		{
+			"name": "mysql-php-dev",
+			"type": "database",
+			"db_host": "hostingbahia3.com.ar",
+			"db_name": "goldmoll_sindicato",
+			"db_user": "goldmoll_user",
+			"db_pass": "a9GnAeJL",
+			"db_port": 3061,
+			"db_type": "mysql"
+
+		},
+		{
+			"name": "mysql-php-qa",
+			"type": "database",
+			"db_host": "hostingbahia3.com.ar",
+			"db_name": "goldmoll_asindicato",
+			"db_user": "goldmoll_user",
+			"db_pass": "a9GnAeJL",
+			"db_port": 3061,
+			"db_type": "mysql"
+
+		},
+		{
+			"name": "mysql-php",
+			"type": "database",
+			"db_host": "hostingbahia3.com.ar",
+			"db_name": "goldmoll_sindicato",
+			"db_user": "goldmoll_user",
+			"db_pass": "a9GnAeJL",
+			"db_port": 3061,
+			"db_type": "mysql"
+
+		}
+	],
+	"apps": {
+		"web": {
+			"storage": ["mysql-php-dev"],
+			"map": {
+					"user": "users",
+					"trabajador": "trabajadores",
+					"empresaTrabajador": "empresa_trabajador"
+					
+				}
+			}
+	}	
+}

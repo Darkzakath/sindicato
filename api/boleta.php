@@ -1,58 +1,120 @@
 <?php
 
-require 'Slim/Slim.php';
+//require 'Slim/Slim.php';
 
-$app = new Slim();
+//$app = new Slim();
 
-$app->get('/boletas', 'getBoletas');
-$app->get('/boletas/:id',	'getBoleta');
-$app->get('/boletas/search/:query', 'findByName');
-$app->post('/boletas', 'addBoleta');
-$app->put('/boletas/:id', 'updateCategoria');
-$app->delete('/boletas/:id',	'deleteBoleta');
+$app->get('/boletas', function() use ($app){
 
-$app->run();
+	global $sql;
+	$query = "SELECT * FROM boletas WHERE deleted = 0";
+	$resource = $sql->query($query);
 
-function getBoletas() {
+	$response = $app->response();
+	$response['Content-Type'] = 'application/json';
 
-	$sql = "select * FROM boleta ORDER BY name";
-	try {
-		$db = getConnection();
-		$stmt = $db->query($sql);  
-		$boletas = $stmt->fetchAll(PDO::FETCH_OBJ);
-		$db = null;
-		echo json_encode($boletas);
-	} catch(PDOException $e) {
-		echo '{"error":{"text":'. $e->getMessage() .'}}'; 
+	if ($resource === false) {
+		$app->response()->status(400);
+	} else {
+		$ret_array = array();
+		while($row = $resource->fetch_assoc()){
+			$ret_array[] = $row;
+		};
+		$response->write(json_encode($ret_array));
+	};
+});
+
+$app->get('/boletas/:id', function($id) use ($app){
+
+	global $sql;
+	$query = "SELECT * FROM boletas WHERE deleted = 0 AND id = " . $id;
+	$resource = $sql->query($query);
+
+	$response = $app->response();
+	$response['Content-Type'] = 'application/json';
+
+	if ($resource === false) {
+		response()->status(400);
+	} else {
+		$obj = $resource->fetch_assoc();
+
+		if (is_null($obj)) {
+			response()->status(400);
+		} else {
+			$response->write(json_encode($obj));
+		};
+	};
+});
+
+$app->post('/boletas', function() use ($app){
+
+	global $sql;
+	$json = json_decode($app->request()->getBody(), true);
+
+	if (is_null($json)) {
+		response()->status(400);
+		return;
 	}
-}
+	$sql->autocommit(FALSE);
 
-function getBoleta($id) {
+	$id = $bluesystem->createObject("boleta", $json);
+	
+	if ($id) {
+		$bluesystem->handler->commit();
+		$app->response()->write($id);
+	} else {
+		response()->status(400);
+	};
+});
 
-	$sql = "SELECT * FROM boleta WHERE id=:id";
-	try {
-		$db = getConnection();
-		$stmt = $db->prepare($sql);  
-		$stmt->bindParam("id", $id);
-		$stmt->execute();
-		$boletas = $stmt->fetchObject();  
-		$db = null;
-		echo json_encode($boletas); 
-	} catch(PDOException $e) {
-		echo '{"error":{"text":'. $e->getMessage() .'}}'; 
-	}
-}
+$app->put('/boletas/:id', function ($id) use ($app){
 
-function addBoleta() {
-}
+	global $sql;
+	$json = json_decode($app->request()->getBody(), true);
+	$query = "SELECT * FROM boletas WHERE deleted = 0 AND id = " . $id;
+	$resource = $sql->query($query);
 
-function updateCategoria($id) {
-}
+	$response = $app->response();
+	$response['Content-Type'] = 'application/json';
 
-function deleteBoleta($id) {
-}
+	$sql->autocommit(FALSE);
+	$id = $bluesystem->createObject("boleta", $json);
 
-function findByName($query) {
-}
+	if ($resource === false && is_null($json)) {
+		response()->status(400);
+	} else {
+		$obj = $resource->fetch_assoc();
+
+		if (is_null($obj)) {
+			response()->status(400);
+		} else {
+			$bluesystem->handler->commit();
+			$app->response()->write($id);
+		};
+	};
+});
+
+$app->delete('/boletas/:id', function ($id) use ($app){
+	
+	global $sql;
+	$query = "SELECT * FROM boletas WHERE deleted = 0 AND id = " . $id;
+	$resource = $sql->query($query);
+
+	$response = $app->response();
+	$response['Content-Type'] = 'application/json';
+
+	if ($resource === false) {
+		response()->status(400);
+	} else {
+		$obj = $resource->fetch_assoc();
+
+		if (is_null($obj)) {
+			response()->status(400);
+		} else {
+			// cambiar el flag
+			$response->write(json_encode($obj));
+		};
+	};
+});
 
 ?>
