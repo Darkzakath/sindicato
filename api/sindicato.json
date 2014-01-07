@@ -68,7 +68,7 @@
 			]
 		},
 		{
-			"name": "administradores",
+			"name": "admin",
 			"nd_fields": true,
 			"fields": [
 				{
@@ -86,12 +86,12 @@
 			]
 		},
 		{
-			"name": "categorias",
+			"name": "categoria",
 			"nd_fields": true,
 			"fields": [
 				{
 					"name": "antiguedad",
-					"type": ""
+					"type": "numeric"
 				},
 				{
 					"name": "desde",
@@ -116,7 +116,7 @@
 			]
 		},
 		{
-			"name": "empresas",
+			"name": "empresa",
 			"nd_fields": true,
 			"fields": [
 				{
@@ -155,7 +155,7 @@
 			]
 		},
 		{
-			"name": "boletas",
+			"name": "boleta",
 			"nd_fields": true,
 			"fields": [
 				{
@@ -260,8 +260,10 @@
 			"map": {
 					"user": "users",
 					"trabajador": "trabajadores",
+					"admin": "administradores",
+					"categoria": "categorias",
+					"empresa": "empresas",
 					"empresaTrabajador": "empresa_trabajador"
-					
 				}
 			}
 	}	

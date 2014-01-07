@@ -52,7 +52,9 @@ $app->get('/users/:id', function($id) use ($app, $system){
 });
 
 $app->post('/users', function() use ($app, $system){
+	
 	$json = json_decode($app->request()->getBody(), true);
+	
 	if (is_null($json)) {
 		$response = $app->response();
 	    $response->status(400);
