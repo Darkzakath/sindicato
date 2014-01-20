@@ -114,7 +114,7 @@ class query {
         } else {
             $fields = $this->nd->getObjectFieldList($this->entity);
             $query = "SELECT `" . join($fields, '`, `') . "` FROM " . $this->nd->entityMap($this->entity);
-            if (!is_null($this->predicative)) $query .= " WHERE " . $this->predicative->generateSQL();
+            if (!is_null($this->predicative)) $query .= " WHERE " . $this->predicative->generateSQL() . "AND deleted = 0";
         };
         //echo $query;
         return $this->nd->handler->query($query);
