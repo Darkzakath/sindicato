@@ -5,10 +5,7 @@ namespace Nd;
 class query {
     protected $nd;
     protected $entity;
-<<<<<<< HEAD
     protected $relation;
-=======
->>>>>>> 761859af77d15d99ea4a125f63b609ce2ef8d92f
     protected $isRelation = false;
     protected $predicative = null;
 
@@ -28,16 +25,11 @@ class query {
     /*
     * to be implemented
     */
-<<<<<<< HEAD
+
     public function relation($relation_name, $entity_name) {
         $this->isRelation = true;
         $this->entity = $entity_name;
         $this->relation = $relation_name;
-=======
-    public function relation($relation_name) {
-        $this->isRelation = true;
-        $this->entity = $relation_name;
->>>>>>> 761859af77d15d99ea4a125f63b609ce2ef8d92f
         return $this;
     }
 
@@ -91,7 +83,6 @@ class query {
     * execute current query
     **/
     public function exec() {
-<<<<<<< HEAD
         if ($this->isRelation) {
             $relation = $this->nd->getRelationInfo($this->relation);
             $object_to = $relation["object_to"];
@@ -126,11 +117,6 @@ class query {
             if (!is_null($this->predicative)) $query .= " WHERE " . $this->predicative->generateSQL();
         };
         //echo $query;
-=======
-        $fields = $this->nd->getObjectFieldList($this->entity);
-        $query = "SELECT `" . join($fields, '`, `') . "` FROM " . $this->nd->entityMap($this->entity);
-        if (!is_null($this->predicative)) $query .= " WHERE " . $this->predicative->generateSQL();
->>>>>>> 761859af77d15d99ea4a125f63b609ce2ef8d92f
         return $this->nd->handler->query($query);
     }
 };
