@@ -26,7 +26,12 @@ class Auth {
       if (!is_null($token)) $_token = $token;
       if (is_null($_token)) return false;
         //var_dump("SELECT usr_id FROM auth_tokens WHERE expiration > CURRENT_TIMESTAMP AND token LIKE '".$token . "'");
+<<<<<<< HEAD
+      $result = $this->handler->query("SELECT usr_id FROM auth_tokens WHERE expiration > CURRENT_TIMESTAMP AND token LIKE '" . $_token . "'");
+      if ($result->num_rows){
+=======
       if ($this->handler->query("SELECT usr_id FROM auth_tokens WHERE expiration > CURRENT_TIMESTAMP AND token LIKE '" . $_token . "'")){
+>>>>>>> 761859af77d15d99ea4a125f63b609ce2ef8d92f
           $this->handler->query("UPDATE user SET expiration = NOW() + INTERVAL 1 HOUR");
           return true;
       }else{
@@ -39,11 +44,20 @@ class Auth {
     * @return: id del usuario del token o -1
     */
     public function getUserId($token = null) {
+<<<<<<< HEAD
+      $_token = $this->token;
+      if (!is_null($token)) $_token = $token;
+      $result = $this->handler->query("SELECT usr_id FROM auth_tokens WHERE expiration > NOW() AND token LIKE '". $_token . "'");
+      if ($result){
+          $row = $result->fetch_assoc();
+          return is_null($row['usr_id']) ? 0 : $row['usr_id'];
+=======
       $_token = $this->$token;
       if (!is_null($token)) $_token = $token;
       if ($this->handler->query("SELECT id_usr FROM auth_tokens WHERE expiration > CURRENT_TIMESTAMP AND token LIKE '". $token . "'")){
           $row = $result->fetch_array($result);
           return $row['usr_id'];
+>>>>>>> 761859af77d15d99ea4a125f63b609ce2ef8d92f
       }else{
           return 0;
       }

@@ -8,7 +8,11 @@ require_once 'libs/Slim/Middleware.php';
 class AuthMiddleware extends \Slim\Middleware
 {
     protected $system;
+<<<<<<< HEAD
+    public $auth;
+=======
     protected $auth;
+>>>>>>> 761859af77d15d99ea4a125f63b609ce2ef8d92f
 
     public function __construct($nd)
     {

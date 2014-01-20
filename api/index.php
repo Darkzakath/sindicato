@@ -22,7 +22,8 @@ $app = new \Slim\Slim();
 error_reporting(E_ALL);
 
 // Nd settings up
-$config_data = file_get_contents('sindicato.json');
+$config_file = 'sindicato.json';
+$config_data = file_get_contents($config_file);
 $config_json = json_decode($config_data, true);
 $system = new \nd\neodynium($config_json);
 $system->startApp("web");
