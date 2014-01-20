@@ -29,6 +29,7 @@ define(function() {
         exports : 'Handlebars'
       },
       'bootstrap': {
+          deps: ['jquery'],
         exports : 'Bootstrap'
       },
       'bootbox': {
