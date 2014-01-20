@@ -3,7 +3,8 @@ define (['backbone'], function(backbone){
 		defaults:{
 			username: '',
 			password: '',
-			email: ''
+			email: '',
+			loged: false
 		},
 		url: 'api/my',
         login: function (loginObj) {
@@ -20,7 +21,7 @@ define (['backbone'], function(backbone){
                     this.set('loged', true);
                     this.set('token', response);
                     $.cookie('ACCESS_TOKEN', response);
-                    this.setUp();
+                    this.fetch();
                 }.bind(this),
                 error: function() {
                         bootbox.dialog({
