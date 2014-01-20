@@ -6,9 +6,12 @@ header('Access-Control-Allow-Headers: X-Requested-With');
 ini_set('display_errors', 1);
 
 // SLIM Framework, to provide REST capability and scalfolding
-require 'Slim/Slim.php';
+require 'libs/Slim/Slim.php';
 // small propietary ORM
-require 'nd/nd.php';
+require 'libs/nd/nd.php';
+// small propietary Auth
+require_once 'libs/Auth/Auth.php';
+require_once 'libs/Auth/AuthMiddleware.php';
 
 // SLIM setting up
 \Slim\Slim::registerAutoloader();
@@ -17,8 +20,10 @@ $app = new \Slim\Slim();
 // Nd settings up
 $config_file = 'sindicato.json';
 $config_data = file_get_contents($config_file);
+//var_dump($config_data);
 $config_json = json_decode($config_data, true);
-$system = new \nd\neodymium($config_json);
+//var_dump($config_json);
+$system = new \nd\neodynium($config_json);
 $system->startApp("web");
 
 $app->get('/', function () use ($app){

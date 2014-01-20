@@ -191,7 +191,7 @@
 	        "nd_fields": true,
 	        "object_from": "empresa",
 	        "type": "one-to-many",
-	        "object_to": "trabajadores",
+	        "object_to": "trabajadores"
 	    },
 	    {
 			"name": "booksTree",
@@ -266,5 +266,5 @@
 					"empresaTrabajador": "empresa_trabajador"
 				}
 			}
-	}	
+	}
 }
