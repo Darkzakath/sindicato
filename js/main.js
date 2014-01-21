@@ -10,7 +10,8 @@ require(
         'app/application'
       ],
       function(Application) {
-        Application.init();
+            window.SGS = Application;
+            Application.init();
       });
   }
 );

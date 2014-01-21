@@ -21,7 +21,10 @@ define (['backbone'], function(backbone){
                     this.set('loged', true);
                     this.set('token', response);
                     $.cookie('ACCESS_TOKEN', response);
-                    this.fetch();
+                    this.fetch({
+                        success: function () { SGS.router.navigate('home', {trigger: true}); },
+                        error: function () { SGS.router.navigate('login', {trigger: true}); },
+                    });
                 }.bind(this),
                 error: function() {
                         bootbox.dialog({

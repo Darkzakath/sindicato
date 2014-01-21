@@ -1,6 +1,5 @@
-define(['jquery', 'underscore', 'backbone', 'views/main.view'], function($, _, Backbone, projectView){
-    var mainView = new projectView(),
-        router = Backbone.Router.extend({
+define(['jquery', 'underscore', 'backbone'], function($, _, Backbone){
+    var router = Backbone.Router.extend({
             routes: {
                 // Define some URL routes
                 'login': 'login',
@@ -11,30 +10,30 @@ define(['jquery', 'underscore', 'backbone', 'views/main.view'], function($, _, B
                 //'*actions': 'home'
             },
             initialize: function () {
-                this.mainView = mainView
-                this.mainView.render();
-                window.project = this.mainView;
-                var self = this;
-                this.mainView.user.fetch({
-                    success: function () { self.navigate('home', {trigger: true}); },
-                    error: function () { self.navigate('login', {trigger: true}); },
-                });
+                this.access_token = $.cookie('ACCESS_TOKEN');
+
+                if (this.access_token) {
+                //get info from token
+                    $.ajaxSetup({
+                        headers: { 'ACCESS_TOKEN': this.access_token }
+                    });
+                };
+
             },
             login: function () {
-                debugger;
-                if (!mainView.user.isNew()) {
+                if (!SGS.mainView.user.isNew()) {
                     this.navigate('/home', {trigger: true});
                 } else {
-                    this.mainView.renderLogin();
+                    SGS.mainView.renderLogin();
                 };
             },
             logout: function () {},
             singup: function () {},
             home: function () {
-                if (mainView.user.isNew()) {
+                if (SGS.mainView.user.isNew()) {
                     this.navigate('login', {trigger: true});
                 } else {
-                    mainView.render();
+                    SGS.mainView.render();
                 };
             }
         });

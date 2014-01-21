@@ -24,12 +24,11 @@
     </div>
     <script type="text/javascript">
         $( function () {
-            debugger;
             $("#login-form").submit( function (evt) {
                 var login = {};
                 login.username = $("#userinput").val();
                 login.password = $("#passinput").val();
-                project.user.login(login);
+                SGS.mainView.user.login(login);
                 evt.preventDefault();
                 return false;
             });
