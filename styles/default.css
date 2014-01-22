@@ -29,11 +29,16 @@ a img {border: 0;}
 /*
  * Global styles:
  */
+@font-face{
+  font-family: SegoeUI;
+  src: url('../fonts/SEGOEUI.ttf');
+}
 
- html, body {
+html, body {
   height: 100%;
   width: 100%;
   margin: 0 auto;
+  font-family: 'SegoeUI';
 }
 
 /* Clear fix for floated elements
@@ -44,3 +49,67 @@ http://css-tricks.com/snippets/css/clear-fix/
   display: table;
   clear: both;
 }
+
+
+
+/* ----------------------- */
+
+.logo .back-background{
+font-size: 10em;
+position: absolute;
+text-align: center;
+width: 100%;
+opacity: 0.1;
+}
+
+
+.logo .front-background{
+position: relative;
+left: 95px;
+top: 80px;
+font-size: 3em;
+width: 100%;
+}
+
+.sign-left {
+    padding-top: 100px;
+    width: 40%;
+}
+
+.sign-right{
+  /*width: 50%;*/
+  padding-top: 100px;
+  float: left;
+}
+  .sign-right .section{
+    margin-top: 50px;
+  }
+  .sign-right .section .label{
+    margin-bottom: 4px;
+  }
+  .textbox input{
+    font-size: 1.2em;
+    width: 240px;
+  }
+  .iniciar{
+    float: left;
+    color: white;
+    background-color: #1E82CC;
+    font-weight: bold;
+    margin-top: 25px;
+    height: 2.1em;
+    line-height: 2.1em;
+    font-size: 0.9em;
+    padding: 3px 12px 5px;
+  }
+  .iniciar:hover{
+    background-color: #4173c9;
+    cursor: pointer;
+  }
+  .new{
+    margin-top: 100px;
+  }
+  .new:hover{
+    color: #4173c9;
+    cursor: pointer;
+  }

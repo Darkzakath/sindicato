@@ -4,10 +4,12 @@ define(['jquery',
         'backbone',
         'app/router',
         'views/main.view',
-        'bootbox'], function($, cookie, _, Backbone, Router, projectView){
+        'app/login.app',
+        'bootbox'], function($, cookie, _, Backbone, Router, projectView, loginApp){
 
     return {
         router : null,
+        loginApp: loginApp,
         init : function () {
             this.router = new Router();
             this.mainView = new projectView();
@@ -19,7 +21,9 @@ define(['jquery',
             });
 
             Backbone.history.start();
-
+        },
+        showLogin: function () {
+            this.loginApp.init($(document.body));
         }
     };
 });

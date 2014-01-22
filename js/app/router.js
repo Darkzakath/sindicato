@@ -24,7 +24,7 @@ define(['jquery', 'underscore', 'backbone'], function($, _, Backbone){
                 if (!SGS.mainView.user.isNew()) {
                     this.navigate('/home', {trigger: true});
                 } else {
-                    SGS.mainView.renderLogin();
+                    SGS.showLogin();
                 };
             },
             logout: function () {},

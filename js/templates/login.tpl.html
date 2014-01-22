@@ -1,36 +1,50 @@
- <div class="panel panel-primary form-signin">
-            <div class="panel-heading">
-                <h3 class="panel-heading"> Ingresar </h3>
-            </div>
-            <div class="panel-body">
-                <form role="form" id="login-form">
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Usuario</label>
-                    <input type="text" class="form-control" id="userinput" placeholder="Ingrese su nombre de usuario">
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="passinput" placeholder="Constraseña">
-                  </div>
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox"> Recuerdame
-                    </label>
-                  </div>
-                  <button type="submit" class="btn btn-default">Submit</button>
-                </form>
-            </div>
-        </div>
+ <div class="row">
+        <div id="register-widget" class="col-md-6">
+    		<div class="panel sign-left pull-right">
+    		    <form role="form">
+                    <div class="form-group">
+                        <label for="regCuit">CUIT (sin guiones)</label>
+                        <input type="text" class="form-control" id="regCuit" placeholder="cuit">
+                    </div>
+                    <div class="form-group">
+                        <label for="regPassword">Contraseña</label>
+                        <input type="password" class="form-control" id="regPassword" placeholder="Contraseña">
+                    </div>
+                    <div class="form-group">
+                        <label for="regPassword2">Contraseña</label>
+                        <input type="password" class="form-control" id="regPassword2" placeholder="Repetir contraseña">
+                    </div>
+                    <div class="form-group">
+                        <label for="regEmail">Contraseña</label>
+                        <input type="email" class="form-control" id="regEmail" placeholder="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="regEmail">Contraseña</label>
+                        <input type="email" class="form-control" id="regEmail2" placeholder="Repetir email">
+                    </div>
+                    <button type="submit" class="btn btn-default">Registrarse</button>
+                    <a href="#" class="">Cancelar</a>
+    			</form>
+    		</div>
+    	</div>
+    	<div class="logo col-md-6 sign-left">
+    		<span class="back-background">SGS</span>
+    		<span class="front-background">Sindicato Grafico Sure&ntilde;o</span>
+    	</div>
+    	<div id="login-widget" class="col-md-6">
+    		<div class="panel sign-right">
+    		    <form role="form">
+                    <div class="form-group">
+                        <label for="loginCuit">CUIT (sin guiones)</label>
+                        <input type="text" class="form-control" id="loginCuit" placeholder="cuit">
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Contraseña</label>
+                        <input type="password" class="form-control" id="loginPassword" placeholder="Contraseña">
+                    </div>
+                    <button type="submit" class="btn btn-default">Ingresar</button>
+                    <a href="#" class="">Registrarse</a>
+    			</form>
+    		</div>
+    	</div>
     </div>
-    <script type="text/javascript">
-        $( function () {
-            $("#login-form").submit( function (evt) {
-                var login = {};
-                login.username = $("#userinput").val();
-                login.password = $("#passinput").val();
-                SGS.mainView.user.login(login);
-                evt.preventDefault();
-                return false;
-            });
-        });
-    </script>

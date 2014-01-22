@@ -54,26 +54,26 @@ http://css-tricks.com/snippets/css/clear-fix/
 
 /* ----------------------- */
 
-.sign-left{
-  width: 50%;
-  float: left;
-  padding-top: 100px;
-
+.logo .back-background{
+font-size: 10em;
+position: absolute;
+text-align: center;
+width: 100%;
+opacity: 0.1;
 }
 
-  .sign-left .back-background{
-    font-size: 10em;
-    position: absolute;
-    text-align: center;
-    width: 50%;
-    opacity: 0.1;
-  }
-  .sign-left .front-background{
-    position: relative;
-    left: 95px;
-    top: 80px;
-    font-size: 3em;
-  }
+
+.logo .front-background{
+position: relative;
+left: 95px;
+top: 80px;
+font-size: 3em;
+width: 100%;
+}
+
+.sign-left {
+    padding-top: 100px;
+}
 
 .sign-right{
   /*width: 50%;*/
