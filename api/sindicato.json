@@ -124,6 +124,10 @@
 					"type": "string"
 				},
 				{
+					"name": "password",
+					"type": "string"
+				},
+				{
 					"name": "cuit",
 					"type": "int"
 				},
@@ -202,24 +206,6 @@
 		}
 	],
 	"storages": [
-		{
-			"name": "webapi",
-			"type": "api",
-			"url": "http://api.fotocasitaazul.com.ar",
-			"base_uri": "/"
-		},
-		{
-			"name": "webapi-dev",
-			"type": "api",
-			"url": "http://dev.fotocasitaazul.com.ar",
-			"base_uri": "/api"
-		},
-		{
-			"name": "webapi-qa",
-			"type": "api",
-			"url": "http://qa.fotocasitaazul.com.ar",
-			"base_uri": "/api"
-		},
 		{
 			"name": "mysql-php-dev",
 			"type": "database",

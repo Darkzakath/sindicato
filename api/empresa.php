@@ -3,7 +3,6 @@
 //require 'Slim/Slim.php';
 
 //$app = new Slim();
-
 $app->get('/empresas', function() use ($app){
 
 	global $sql;
@@ -58,7 +57,7 @@ $app->post('/empresas', function() use ($app){
 	$sql->autocommit(FALSE);
 
 	$id = $bluesystem->createObject("empresa", $json);
-	
+
 	if ($id) {
 		$bluesystem->handler->commit();
 		$app->response()->write($id);
@@ -95,7 +94,7 @@ $app->put('/empresas/:id', function ($id) use ($app){
 });
 
 $app->delete('/empresas/:id', function ($id) use ($app){
-	
+
 	global $sql;
 	$query = "SELECT * FROM empresas WHERE deleted = 0 AND id = " . $id;
 	$resource = $sql->query($query);

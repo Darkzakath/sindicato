@@ -40,6 +40,7 @@ $app->get('/noop', function () use ($app){
 });
 
 require_once 'security/access.php';
+require_once 'security/register.php';
 
 // SLIM start point
 $app->run();
