@@ -1,0 +1,24 @@
+.borderless {
+    border:none;
+}
+.row-border-t{
+    border-top: 1px solid;
+}
+.row-border-r{
+    border-right: 1px solid;
+}
+.row-border-b{
+    border-bottom: 1px solid;
+}
+.row-border-l{
+    border-left: 1px solid;
+}
+/* ------ Prototipe ------ */
+.table-no-border>thead>tr>th, 
+.table-no-border>tbody>tr>th, 
+.table-no-border>tfoot>tr>th, 
+.table-no-border>thead>tr>td, 
+.table-no-border>tbody>tr>td, 
+.table-no-border>tfoot>tr>td {
+  border-top: none; 
+}
