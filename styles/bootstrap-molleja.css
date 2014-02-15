@@ -22,3 +22,7 @@
 .table-no-border>tfoot>tr>td {
   border-top: none; 
 }
+
+.paddin-top-20{
+    padding-top: 10%;
+}
