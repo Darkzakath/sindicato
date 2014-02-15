@@ -23,6 +23,16 @@
   border-top: none; 
 }
 
+/* ------ Padding Top ------ */
 .paddin-top-20{
     padding-top: 10%;
+}
+
+.paddin-top-10{
+    padding-top: 7%;
+}
+
+/* ------ Padding left ------ */
+.padding-lef-10{
+    padding-left: 10%;   
 }
