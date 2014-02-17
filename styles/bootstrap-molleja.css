@@ -31,8 +31,18 @@
 .paddin-top-10{
     padding-top: 7%;
 }
-
 /* ------ Padding left ------ */
 .padding-lef-10{
     padding-left: 10%;   
+}
+
+/* ------ Margin Top ------ */
+.margin-top-m{
+    margin-top: -5%;
+}
+
+.ul-style{
+    background-color: #428bca;
+    color: white;
+    padding-right: 5px;
 }
