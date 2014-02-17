@@ -4,8 +4,8 @@ body{
 }
 
 @font-face{
-  font-family: SegoeUI;
-  src: url('../fonts/BarcodeFont.ttf');
+  font-family: A;
+  src: url('../font/BarcodeFont.ttf');
 }
 
 .titulo {
@@ -63,7 +63,7 @@ body{
 }
 
 .codigodebarra{
-	font-family: 'barcode font';
+	font-family: 'A';
 	margin-top: 20px;
 	margin-bottom: 20px;
 	/*font-size: 4em;*/
