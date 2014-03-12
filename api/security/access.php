@@ -1,73 +1,60 @@
 <?php
 
-$app->post('/login', function () use ($system, $app) {
-    $auth = new \c2si\Auth();
-    $auth->setHandler($system->handler);
+$app->post('/login', function () use ($app) {
+    $auth = new Auth();   
 
     $json = json_decode($app->request()->getBody(), true);
 
-    $query = $system->query("user");
-    $query->filterBy("username", "equal", $json["username"])->andBy("password", "equal", md5($json["password"]));
+    $user = R::findOne('user', 'username LIKE ? AND password LIKE ?', [$json["username"], md5($json["password"])]);
 
-    $resp = $query->exec();
-
-    if ($resp && $user = $resp->fetch_assoc()) {
-        $token = $auth->generateToken($user["id"]);
+    if ($user) {
+        $token = $auth->generateToken($user->id);
         $app->response->headers->set('ACCESS_TOKEN', $token);
         $app->setCookie('ACCESS_TOKEN', $token);
         $app->response()->status(200);
         $app->response()->write($token);
     } else {
         $app->response()->status(500);
-        $app->response()->write(\nd\response::fail("invalid user")->toJson());
+        $app->response()->write(response::fail("invalid user")->toJson());
     };
 });
 
 //login of business
-$app->post('/login/business', function () use ($system, $app) {
-    $auth = new \c2si\Auth();
-    $auth->setHandler($system->handler);
+$app->post('/login/business', function () use ($app) {
+    $auth = new Auth();
 
     $json = json_decode($app->request()->getBody(), true);
 
-    $query = $system->query("empresas");
-    $query->filterBy("cuit", "equal", $json["cuit"])->andBy("password", "equal", md5($json["password"]));
+    $business = R::findOne('business', 'cuit LIKE ? AND password LIKE ?', [$json["cuit"], md5($json["password"])]);
 
-    $resp = $query->exec();
-
-    if ($resp && $user = $resp->fetch_assoc()) {
-        $token = $auth->generateToken($user["id"]);
+    if ($business) {
+        $token = $auth->generateToken($business->id);
         $app->response->headers->set('ACCESS_TOKEN', $token);
         $app->setCookie('ACCESS_TOKEN', $token);
         $app->response()->status(200);
         $app->response()->write($token);
     } else {
         $app->response()->status(500);
-        $app->response()->write(\nd\response::fail("invalid user")->toJson());
+        $app->response()->write(response::fail("invalid user")->toJson());
     };
 });
 
-//register of business
-$app->post('/login/register/business', function () use ($system, $app) {
 
-});
-
-$app->post('/logout', function () use ($system, $app) {
-    $auth = new \c2si\Auth();
-    $auth->setHandler($system->handler);
+$app->post('/logout', function () use ($app) {
+    $auth = new Auth();
     $token = $app->request->headers->get('ACCESS_TOKEN');
     if (!$token) $token = $app->getCookie('ACCESS_TOKEN');
     if ($auth->obsoleteToken($token)) {
-        $app->response()->write(\nd\response::pass("logout succefully")->toJson());
+        $app->response()->write(response::pass("logout succefully")->toJson());
     } else {
         $app->response()->status(500);
-        $app->response()->write(\nd\response::fail("invalid token")->toJson());
+        $app->response()->write(response::fail("invalid token")->toJson());
     };
 
 });
 
-$app->get('/my', function () use ($system, $app) {
-    $auth = new \c2si\Auth();
+$app->get('/my', function () use ($app) {
+    $auth = new Auth();
     $auth->setHandler($system->handler);
     $token = $app->request->headers->get('ACCESS_TOKEN');
     $userid = $auth->getUserId($token);

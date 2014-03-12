@@ -1,13 +1,13 @@
 <?php
 
-$app->post('/register/business', function() use ($system, $app) {
+$app->post('/register/newbusiness', function() use ($app) {
     $response = $app->response();
 	$response['Content-Type'] = 'application/json';
 
     $json = json_decode($app->request()->getBody(), true);
 
     //check for all values
-    $ok = true;
+    $ok = true;    
     $ok = $ok && isset($json['cuit']);
     $ok = $ok && isset($json['password']);
     $ok = $ok && isset($json['password2']);
@@ -16,7 +16,7 @@ $app->post('/register/business', function() use ($system, $app) {
 
     if (!$ok){
         $app->response()->status(500);
-        $app->response()->write(\nd\response::fail("invalid JSON")->toJson());
+        $app->response()->write(response::fail("invalid JSON")->toJson());
         return;
     };
 
@@ -28,33 +28,65 @@ $app->post('/register/business', function() use ($system, $app) {
 
     if ($err_validation !== "") {
         $app->response()->status(500);
-        $app->response()->write(\nd\response::fail("invalid JSON")->toJson());
+        $app->response()->write(\nd\response::fail("invalid data")->toJson());
         return;
     };
 
     // all ok, let persist
-    $business = array();
-    $business["correo"] = $json['email'];
-	$business["cuit"] = $json['cuit'];
-	$business["password"] = md5($json['password']);
-	$business["domicilio"] = "";
-	$business["localidad"] = "";
-	$business["nombre"] = "";
-	$business["razonsocial"] = "";
-	$business["telefono"] = "";
+    $business = R::dispense('newbusiness');
+    $business->cuit = $json["cuit"];
+    $business->email = $json['email'];
+    $business->password = md5($json["password"]);
+    $business->token = md5($business->cuit + $business->email);
+    $business->expiration = date(DateTime::ISO8601, time() + (7 * 24 * 60 * 60)); //one week
 
-	$system->handler->autocommit(FALSE);
-	$id = $system->createObject("empresa", $business);
+	R::begin();
+	
+    $id = R::store($business);
 
 	if ($id) {
-		$system->handler->commit();
-		$app->response()->write($id);
+		R::commit();
+		$app->response()->write($business->token);
 	} else {
+        R::rollback();
 		$app->response()->status(500);
-        $app->response()->write(\nd\response::fail("persist failed", $system->handler->error, $system->handler->errno)->toJson());
+        $app->response()->write(response::fail("persist failed")->toJson());
 	};
 
 });
 
+$app->get('/register/business/:token', function($token) use ($app) {
+    $response = $app->response();
+    $response['Content-Type'] = 'application/json';
+
+    $token = R::findOne('newbusiness', 'token LIKE ?', [$token]);
+    if ($token) {
+        $app->response()->write();
+    } else {
+        $app->response()->status(500);
+        $app->response()->write(response::fail("invalid token")->toJson());  
+    };
+});
+
+$app->post('/register/business', function() use ($app) {
+    $response = $app->response();
+    $response['Content-Type'] = 'application/json';    
+
+    $json = json_decode($app->request()->getBody(), true);
+    $business = R::dispense('business');
+    $business->import($json);
+
+    $token = R::findOne('newbusiness', 'token LIKE ? AND expiration > now()', [$business->token]);
+    if (!$token) {
+        $app->response()->status(500);
+        $app->response()->write(response::fail("invalid token")->toJson());  
+        return;
+    };
+
+    unset($business->token);
+
+    $id = R::store($business);
+    $app->response()->write($id);
+});
 
 ?>
