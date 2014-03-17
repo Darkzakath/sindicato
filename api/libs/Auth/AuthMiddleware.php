@@ -1,20 +1,15 @@
 <?php
 
-namespace c2si;
-
 require_once 'libs/Auth/Auth.php';
 require_once 'libs/Slim/Middleware.php';
 
 class AuthMiddleware extends \Slim\Middleware
 {
-    protected $system;
     public $auth;
 
-    public function __construct($nd)
+    public function __construct()
     {
-      $this->system = $nd;
-      $this->auth = new \c2si\Auth();
-      $this->auth->setHandler($this->system->handler);
+      $this->auth = new Auth();      
     }
 
     /**
@@ -34,7 +29,8 @@ class AuthMiddleware extends \Slim\Middleware
         $ok = $this->auth->authentificate($request->headers->get('ACCESS_TOKEN'));
         if (!$ok) {
           $response->status(401);
-          $response->write($request->getResourceUri());                  } else {
+          $response->write($request->getResourceUri());
+        } else {
             $this->next->call();
         };
       } else {

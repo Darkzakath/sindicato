@@ -1,6 +1,6 @@
 <?php
 
-$app->post('/register/newbusiness', function() use ($app) {
+$app->post('/register/business', function() use ($app) {
     $response = $app->response();
 	$response['Content-Type'] = 'application/json';
 
@@ -33,11 +33,12 @@ $app->post('/register/newbusiness', function() use ($app) {
     };
 
     // all ok, let persist
-    $business = R::dispense('newbusiness');
+    $business = R::dispense('business');
     $business->cuit = $json["cuit"];
     $business->email = $json['email'];
     $business->password = md5($json["password"]);
     $business->token = md5($business->cuit + $business->email);
+    $business->active = false
     $business->expiration = date(DateTime::ISO8601, time() + (7 * 24 * 60 * 60)); //one week
 
 	R::begin();
@@ -59,34 +60,13 @@ $app->get('/register/business/:token', function($token) use ($app) {
     $response = $app->response();
     $response['Content-Type'] = 'application/json';
 
-    $token = R::findOne('newbusiness', 'token LIKE ?', [$token]);
+    $token = R::findOne('business', 'token LIKE ? and NOT active', [$token]);
     if ($token) {
         $app->response()->write();
     } else {
         $app->response()->status(500);
         $app->response()->write(response::fail("invalid token")->toJson());  
     };
-});
-
-$app->post('/register/business', function() use ($app) {
-    $response = $app->response();
-    $response['Content-Type'] = 'application/json';    
-
-    $json = json_decode($app->request()->getBody(), true);
-    $business = R::dispense('business');
-    $business->import($json);
-
-    $token = R::findOne('newbusiness', 'token LIKE ? AND expiration > now()', [$business->token]);
-    if (!$token) {
-        $app->response()->status(500);
-        $app->response()->write(response::fail("invalid token")->toJson());  
-        return;
-    };
-
-    unset($business->token);
-
-    $id = R::store($business);
-    $app->response()->write($id);
 });
 
 ?>

@@ -12,7 +12,5 @@ $auth_token->expire = date(DateTime::ISO8601);
 
 R::store($auth_token);*/
 $token = R::findOne('authtokens', 'token LIKE ?', ['d404d12c718931e367cefef07cb0e8b1']);
-echo $token->user_id;
-var_dump($token->user);
 
 ?>

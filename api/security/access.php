@@ -25,7 +25,7 @@ $app->post('/login/business', function () use ($app) {
 
     $json = json_decode($app->request()->getBody(), true);
 
-    $business = R::findOne('business', 'cuit LIKE ? AND password LIKE ?', [$json["cuit"], md5($json["password"])]);
+    $business = R::findOne('business', 'cuit LIKE ? AND password LIKE ? AND active', [$json["cuit"], md5($json["password"])]);
 
     if ($business) {
         $token = $auth->generateToken($business->id);

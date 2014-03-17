@@ -5,7 +5,8 @@ define(['jquery', 'underscore', 'backbone'], function($, _, Backbone){
                 'login': 'login',
                 'logout': 'logout',
                 'singup': 'singup',
-                'home': 'home'
+                'home': 'home',
+                'register/:token': 'newbusiness'
                 // Default
                 //'*actions': 'home'
             },
@@ -35,6 +36,9 @@ define(['jquery', 'underscore', 'backbone'], function($, _, Backbone){
                 } else {
                     SGS.mainView.render();
                 };
+            },
+            newbusiness: function (token) {
+                
             }
         });
 

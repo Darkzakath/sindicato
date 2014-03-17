@@ -9,6 +9,8 @@ date_default_timezone_set('UTC');
 
 // SLIM Framework, to provide REST capability and scalfolding
 require_once 'libs/Slim/Slim.php';
+require_once 'libs/Auth/Auth.php';
+require_once 'libs/Auth/AuthMiddleware.php';
 //RedBean ORM
 require_once 'libs/RedBean/rb.phar';
 //response class

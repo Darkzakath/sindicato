@@ -5,8 +5,9 @@ define(['jquery',
         'app/router',
         'views/main.view',
         'app/login.app',
-        'bootbox'], function($, cookie, _, Backbone, Router, projectView, loginApp){
-
+        'bootbox'], 
+    function($, cookie, _, Backbone, Router, projectView, loginApp){
+        debugger;
     return {
         router : null,
         loginApp: loginApp,

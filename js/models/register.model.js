@@ -8,7 +8,7 @@
 
 define (['backbone'], function(backbone){
 	return backbone.Model.extend({
-	    url: 'api/register/newbusiness',
+	    url: 'api/register/business',
 		defaults:{
 			cuit: '',
 			password: '',
