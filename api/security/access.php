@@ -55,11 +55,11 @@ $app->post('/logout', function () use ($app) {
 
 $app->get('/my', function () use ($app) {
     $auth = new Auth();
-    $auth->setHandler($system->handler);
     $token = $app->request->headers->get('ACCESS_TOKEN');
+    var_dump($app->request->headers);
     $userid = $auth->getUserId($token);
-
-    $user = $system->readObject("user", $userid);
+    var_dump($userid);
+    $user = R::load("business", $userid);
 
     $app->response['Content-Type'] = 'application/json';
     $app->response->write(json_encode($user));

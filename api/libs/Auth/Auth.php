@@ -37,7 +37,9 @@ class Auth {
       $_token = $this->token;
       if (!is_null($token)) $_token = $token;
       //$result = $this->handler->query("SELECT usr_id FROM auth_tokens WHERE expiration > NOW() AND token LIKE '". $_token . "'");
+      var_dump($_token);
       $authtoken = R::findOne('authtoken', 'expiration > now() AND token LIKE ?', [$_token]);      
+      var_dump($authtoken);
       if ($authtoken){          
           return is_null($authtoken->user_id) ? 0 : $authtoken->user_id;
       }else{
@@ -52,20 +54,20 @@ class Auth {
     public function generateToken($userid) {
       $token = "";
       if (!$userid) return $token;
-      $insertedToekn = false;
+      $insertedToken = false;
       $tries = 5;
       do {
-        $token = bin2hex(openssl_random_pseudo_bytes(16));
-        //$insertedToken = $this->handler->query("INSERT INTO auth_tokens (token, expiration, usr_id) VALUES ('".$token."', NOW() + INTERVAL 1 HOUR, " . $userid . ")");
+        $hash = md5(rand());
         $token = R::dispense('authtoken');
-        $token->token = $token;
+        $token->token = $hash;
         $token->expiration = date(DateTime::ISO8601, time() + (1 * 60 * 60));
         $token->user_id = $userid;
         $insertedToken = R::store($token);
+        var_dump($insertedToken);
         $tries--;
       } while (!$insertedToken && !$tries);
 
-      return $token;
+      return $hash;
     }
 
     public function obsoleteToken($token) {

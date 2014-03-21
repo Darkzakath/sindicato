@@ -38,7 +38,7 @@ $app->post('/register/business', function() use ($app) {
     $business->email = $json['email'];
     $business->password = md5($json["password"]);
     $business->token = md5($business->cuit + $business->email);
-    $business->active = false
+    $business->active = false;
     $business->expiration = date(DateTime::ISO8601, time() + (7 * 24 * 60 * 60)); //one week
 
 	R::begin();
@@ -56,16 +56,19 @@ $app->post('/register/business', function() use ($app) {
 
 });
 
-$app->get('/register/business/:token', function($token) use ($app) {
+$app->post('/register/business/:token', function($token) use ($app) {
     $response = $app->response();
     $response['Content-Type'] = 'application/json';
 
     $token = R::findOne('business', 'token LIKE ? and NOT active', [$token]);
-    if ($token) {
-        $app->response()->write();
+    if ($token) {        
+        $token->active = true;
+        R::store($token);
+        $response->status(200);
+        $response->write("{}");
     } else {
         $app->response()->status(500);
-        $app->response()->write(response::fail("invalid token")->toJson());  
+        $app->response()->write(response::fail("token invalido")->toJson());
     };
 });
 

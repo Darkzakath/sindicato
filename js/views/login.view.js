@@ -43,7 +43,7 @@ define([
                 case 'loginCuit':
                     this.loginmodel.set('cuit', value, {validate:true});
                     break;
-                case 'loginPass':
+                case 'loginPassword':
                     this.loginmodel.set('password', value, {validate:true});
                     break;
                 default:
@@ -61,7 +61,7 @@ define([
                 });
                 $elem.popover('show');
             } else {
-                $elem.tooltip('destroy');
+                $elem.popover('destroy');
             };
 
             $elem = this.$el.find('#loginPassword');
@@ -93,8 +93,9 @@ define([
         },
         login: function (evt) {
             this.loginmodel.save({
-                success: function () {
-                    SGS.router.navigate('home', {trigger:true});
+                success: function (token) {
+                    $.cookie('ACCESS_TOKEN', token)
+                    SGS.router.navigate('', {trigger:true});
                 },
                 error: function () {
                     //mostrar cartel de salame

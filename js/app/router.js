@@ -1,4 +1,4 @@
-define(['jquery', 'underscore', 'backbone'], function($, _, Backbone){
+define(['jquery', 'underscore', 'backbone', 'views/authenticate.view'], function($, _, Backbone, authView){
     var router = Backbone.Router.extend({
             routes: {
                 // Define some URL routes
@@ -6,9 +6,9 @@ define(['jquery', 'underscore', 'backbone'], function($, _, Backbone){
                 'logout': 'logout',
                 'singup': 'singup',
                 'home': 'home',
-                'register/:token': 'newbusiness'
+                'register/:token': 'completeRegister',
                 // Default
-                //'*actions': 'home'
+                '*actions': 'fetchUser'
             },
             initialize: function () {
                 this.access_token = $.cookie('ACCESS_TOKEN');
@@ -18,8 +18,13 @@ define(['jquery', 'underscore', 'backbone'], function($, _, Backbone){
                     $.ajaxSetup({
                         headers: { 'ACCESS_TOKEN': this.access_token }
                     });
-                };
-
+                }
+            },
+            fetchUser: function () {
+                SGS.mainView.user.fetch({
+                    success: function () { SGS.router.navigate('home', {trigger: true}); },
+                    error: function () { SGS.router.navigate('login', {trigger: true}); },
+                });
             },
             login: function () {
                 if (!SGS.mainView.user.isNew()) {
@@ -37,8 +42,10 @@ define(['jquery', 'underscore', 'backbone'], function($, _, Backbone){
                     SGS.mainView.render();
                 };
             },
-            newbusiness: function (token) {
-                
+            completeRegister: function (token) {
+                var view = new authView($(document.body));
+                view.render();
+                view.validate(token);
             }
         });
 

@@ -7,7 +7,6 @@ define(['jquery',
         'app/login.app',
         'bootbox'], 
     function($, cookie, _, Backbone, Router, projectView, loginApp){
-        debugger;
     return {
         router : null,
         loginApp: loginApp,
@@ -16,10 +15,7 @@ define(['jquery',
             this.mainView = new projectView();
             this.mainView.render();
             var self = this;
-            this.mainView.user.fetch({
-                success: function () { self.router.navigate('home', {trigger: true}); },
-                error: function () { self.router.navigate('login', {trigger: true}); },
-            });
+            
 
             Backbone.history.start();
         },

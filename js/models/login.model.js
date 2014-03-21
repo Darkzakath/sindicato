@@ -8,7 +8,7 @@
 
 define (['backbone', 'underscore'], function(backbone, _){
 	return backbone.Model.extend({
-	    url: 'api/login',
+	    url: 'api/login/business',
 		defaults:{
 			cuit: '',
 			password: ''
