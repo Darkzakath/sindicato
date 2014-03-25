@@ -53,6 +53,7 @@ $app = new \Slim\Slim();
 error_reporting(E_ALL);
 
 //set Auth middleware
+$app->add(new AuthMiddleware());
 R::setup('mysql:host=localhost;dbname=test', 'root', '');
 
 // Noop - no operation (for testing)
