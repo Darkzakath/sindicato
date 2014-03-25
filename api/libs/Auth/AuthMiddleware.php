@@ -23,10 +23,12 @@ class AuthMiddleware extends \Slim\Middleware
     {
       $request = $this->app->request;
       $response = $this->app->response;
-
+      $headers = getallheaders();
       //si intenta acceder al login, no valido para que pueda pedir token
       if (substr($request->getResourceUri(), 0, 6) !== '/login' && substr($request->getResourceUri(), 0, 9) !== '/register') {
-        $ok = $this->auth->authentificate($request->headers->get('ACCESS_TOKEN'));
+        //$ok = $this->auth->authentificate($request->headers->get('ACCESS_TOKEN'));
+        //var_dump($headers['ACCESS_TOKEN']);
+        $ok = $this->auth->authentificate($headers['ACCESS_TOKEN']);
         if (!$ok) {
           $response->status(401);
           $response->write($request->getResourceUri());

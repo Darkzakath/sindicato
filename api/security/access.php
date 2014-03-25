@@ -5,7 +5,7 @@ $app->post('/login', function () use ($app) {
 
     $json = json_decode($app->request()->getBody(), true);
 
-    $user = R::findOne('user', 'username LIKE ? AND password LIKE ?', [$json["username"], md5($json["password"])]);
+    $user = R::findOne('business', 'username LIKE ? AND password LIKE ?', [$json["username"], md5($json["password"])]);
 
     if ($user) {
         $token = $auth->generateToken($user->id);
@@ -55,14 +55,17 @@ $app->post('/logout', function () use ($app) {
 
 $app->get('/my', function () use ($app) {
     $auth = new Auth();
-    $token = $app->request->headers->get('ACCESS_TOKEN');
-    var_dump($app->request->headers);
+    //$headers = $app->request->headers;
+    $headers = getallheaders();
+    //$token = $app->request->headers->get('ACCESS_TOKEN');
+    //var_dump($token);
+    //$token = $app->request->headers('ACCESS_TOKEN');
+    //var_dump($token);
+    $token = $headers["ACCESS_TOKEN"];
     $userid = $auth->getUserId($token);
-    var_dump($userid);
     $user = R::load("business", $userid);
-
     $app->response['Content-Type'] = 'application/json';
-    $app->response->write(json_encode($user));
+    $app->response->write(json_encode($user->export()));
 });
 
 ?>

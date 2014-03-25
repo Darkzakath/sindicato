@@ -1,10 +1,11 @@
 define([
     'backbone',
     'bootstrap',
+    'bootbox',
     'models/login.model',
     'models/register.model',
     'text!templates/login.tpl.html'
-], function (Backbone, Bootstrap, loginModel, registerModel, tpl) {
+], function (Backbone, Bootstrap, Bootbox, loginModel, registerModel, tpl) {
     var view = Backbone.View.extend({
         initialize: function (el) {
             this.$el = el;
@@ -94,13 +95,16 @@ define([
         login: function (evt) {
             this.loginmodel.save({
                 success: function (token) {
-                    $.cookie('ACCESS_TOKEN', token)
+                    $.cookie('ACCESS_TOKEN', token);
                     SGS.router.navigate('', {trigger:true});
                 },
                 error: function () {
-                    //mostrar cartel de salame
+                    Bootbox.alert({
+                        title: "Hubo un error",
+                        message: "Su usuario o contraseña no es valido"
+                    });
                 }
-            })
+            });
 
             evt.preventDefault();
             return false;
@@ -112,9 +116,12 @@ define([
                 },
                 error: function () {
                     //mostrar cartel de salame
+                    Bootbox.alert({
+                        title: "Hubo un error",
+                        message: "Su usuario o contraseña no es valido"
+                    });
                 }
-            })
-
+            });
             evt.preventDefault();
             return false;
         }
