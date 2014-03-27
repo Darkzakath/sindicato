@@ -54,7 +54,8 @@ error_reporting(E_ALL);
 
 //set Auth middleware
 $app->add(new AuthMiddleware());
-R::setup('mysql:host=localhost;dbname=test', 'root', '');
+//R::setup('mysql:host=localhost;dbname=test', 'root', '');
+R::setup('mysql:host=127.7.72.129;dbname=c9', 'molleja', '');
 
 // Noop - no operation (for testing)
 
